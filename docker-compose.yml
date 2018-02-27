@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  lmyc:
+    image: lmyc
+    build:
+      context: .
+      dockerfile: Lmyc/Dockerfile

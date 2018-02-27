@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lmyc", "Lmyc\Lmyc.csproj", "{E1B448A9-9EFC-44F4-B197-4540EAD5F7DC}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4B6424A4-F384-4F1F-8BBD-EEA5D369B1ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1B448A9-9EFC-44F4-B197-4540EAD5F7DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1B448A9-9EFC-44F4-B197-4540EAD5F7DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1B448A9-9EFC-44F4-B197-4540EAD5F7DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1B448A9-9EFC-44F4-B197-4540EAD5F7DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B6424A4-F384-4F1F-8BBD-EEA5D369B1ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B6424A4-F384-4F1F-8BBD-EEA5D369B1ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B6424A4-F384-4F1F-8BBD-EEA5D369B1ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B6424A4-F384-4F1F-8BBD-EEA5D369B1ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DBB7744-790E-4818-9BFA-AA7212431670}
+	EndGlobalSection
+EndGlobal
