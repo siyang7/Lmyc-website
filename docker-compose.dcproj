@@ -3,9 +3,9 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.0</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>4b6424a4-f384-4f1f-8bbd-eea5d369b1ed</ProjectGuid>
+    <ProjectGuid>e81527d1-a525-44c0-bb6f-1670492aec75</ProjectGuid>
     <DockerLaunchBrowser>True</DockerLaunchBrowser>
-    <DockerServiceUrl>http://localhost:{ServicePort}</DockerServiceUrl>
+    <DockerServiceUrl>http://localhost:{ServicePort}/</DockerServiceUrl>
     <DockerServiceName>lmyc</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
