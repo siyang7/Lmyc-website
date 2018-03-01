@@ -45,4 +45,4 @@ Uses Azure for deployment
 
 * [Old Website](http://www.lmyc.ca/)
 * [WordPress Site](http://www.sailwhiterock.com/)
-* [Docker Tutorial(https://docs.docker.com/get-started/#test-docker-version)
+* [Docker Tutorial](https://docs.docker.com/get-started/#test-docker-version)
