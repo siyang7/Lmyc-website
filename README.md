@@ -7,7 +7,7 @@ an API/JavaScript solution that can be injected into the new WordPress site.
 
 Fork the github repository to your own repository. 
 Follow the following to submit a pull requests
-1. Create a feature branch on your own repo (`Git branch {feature/fix}-name-of-your-branch`)
+1. Create a feature branch on your own repo (`Git branch {Team}-{label}-name-of-your-branch`)
 2. Switch to feature branch (`Git checkout name-of-your-branch`)
 3. Make changes as your assigned (`Remember update changelog.md`)
 4. Stash your changes (`git stash`)
