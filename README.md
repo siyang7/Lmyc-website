@@ -1,18 +1,10 @@
 # LMYC
+![Build Status](https://travis-ci.org/LMYC/Lmyc-website.svg?branch=develop)](https://travis-ci.org/LMYC/Lmyc-website)
+
 ![LMYC Logo](/images/logo.png)
 The client, Mr. Dave Senkler, wishes to migrate functionality for booking boats from the old site to the new site. it was decided to create
 an API/JavaScript solution that can be injected into the new WordPress site.
 
-## Builds
-
-### Develop
-![Build Status](https://travis-ci.org/LMYC/Lmyc-website.svg?branch=develop)](https://travis-ci.org/LMYC/Lmyc-website)
-
-### Frontend
-![Build Status](https://travis-ci.org/LMYC/Lmyc-website.svg?branch=frontend-develop)](https://travis-ci.org/LMYC/Lmyc-website)
-
-### Database
-![Build Status](https://travis-ci.org/LMYC/Lmyc-website.svg?branch=database-develop)](https://travis-ci.org/LMYC/Lmyc-website)
 
 ## Getting Started
 
