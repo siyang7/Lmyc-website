@@ -1,6 +1,14 @@
 language: csharp
 mono: none
-dotnet: 1.1.5
+dotnet: 2.0.5
+before_script:
+  - chmod a+x ./travis-build.sh
+  - chmod a+x ./run-tests.sh
+branches:
+  only:
+    - master
+    - develop
+    - testing
 script:
- - dotnet restore
- - dotnet test Lmyc.Tests
+  - ./travis-build.sh
+  - ./run-tests.sh
