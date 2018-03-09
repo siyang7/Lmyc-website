@@ -1,2 +1,3 @@
 dotnet restore
-dotnet build
+dotnet build Lmyc
+dotnet build Lmyc.Tests
