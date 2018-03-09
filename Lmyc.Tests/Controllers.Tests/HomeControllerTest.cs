@@ -34,7 +34,7 @@ namespace Lmyc.Tests.Controllers.Tests
         }
 
         [TestMethod]
-        public void About_should_return_default_view()
+        public void About_should_return_about_view()
         {
             var result = controller.Index() as ViewResult;
 
@@ -43,7 +43,7 @@ namespace Lmyc.Tests.Controllers.Tests
         }
 
         [TestMethod]
-        public void Contact_should_return_default_view()
+        public void Contact_should_return_contact_view()
         {
             var result = controller.Index() as ViewResult;
 
