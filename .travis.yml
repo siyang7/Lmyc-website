@@ -1,6 +1,6 @@
 language: csharp
 mono: none
-dotnet: 2.0.5
+dotnet: 2.1.4
 before_script:
   - chmod a+x ./travis-build.sh
   - chmod a+x ./run-tests.sh
