@@ -1,5 +1,5 @@
 # LMYC
-![Build Status](https://travis-ci.org/LMYC/Lmyc-website.svg?branch=develop)](https://travis-ci.org/LMYC/Lmyc-website)
+![Build Status](https://travis-ci.org/LMYC/Lmyc-website.svg?branch=develop)
 
 ![LMYC Logo](/images/logo.png)
 The client, Mr. Dave Senkler, wishes to migrate functionality for booking boats from the old site to the new site. it was decided to create
