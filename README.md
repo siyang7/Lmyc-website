@@ -1,22 +1,33 @@
 # LMYC
 ![LMYC Logo](/images/logo.png)
-The client, Mr. Dave Senkler, wishes to migrate functionality for booking boats from the old site to the new site. it was decided to create 
+The client, Mr. Dave Senkler, wishes to migrate functionality for booking boats from the old site to the new site. it was decided to create
 an API/JavaScript solution that can be injected into the new WordPress site.
+
+## Builds
+
+### Develop
+![Build Status](https://travis-ci.org/LMYC/Lmyc-website.svg?branch=develop)](https://travis-ci.org/LMYC/Lmyc-website)
+
+### Frontend
+![Build Status](https://travis-ci.org/LMYC/Lmyc-website.svg?branch=frontend-develop)](https://travis-ci.org/LMYC/Lmyc-website)
+
+### Database
+![Build Status](https://travis-ci.org/LMYC/Lmyc-website.svg?branch=database-develop)](https://travis-ci.org/LMYC/Lmyc-website)
 
 ## Getting Started
 
-Fork the github repository to your own repository. 
+Fork the github repository to your own repository.
 Follow the following to submit a pull requests
 1. Create a feature branch on your own repo (`Git branch {Team}-{label}-name-of-your-branch`)
 2. Switch to feature branch (`Git checkout name-of-your-branch`)
 3. Make changes as your assigned (`Remember update changelog.md`)
 4. Stash your changes (`git stash`)
-5. Sync your local repo with team develop (`git pull upstream develop`) 
+5. Sync your local repo with team develop (`git pull upstream develop`)
 6. Apply the stashed changes (`git stash apply`)
-7. Resolve any merge conflicts 
+7. Resolve any merge conflicts
 8. Commit your change with signing (`git -S -m "Commit messages`)
 9. push your local repo to your personal repo (`git push --set-upstream origin {feature/fix}-name-of-your-branch`)
-10. Create a pull request on github from your 
+10. Create a pull request on github from your
 
 ### Prerequisites
 ```
