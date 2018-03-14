@@ -26,8 +26,18 @@ namespace Lmyc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Lmyc")));
+
+            var host = Configuration["DBHOST"] ?? "localhost";
+            var port = Configuration["DBPORT"] ?? "3306";
+            var password = Configuration["DBPASSWORD"] ?? "secret";
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            {
+                options.UseMySql($"server={host}; userid=root; pwd={password};"
+                    + $"port={port}; database=lmyc");
+            });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -40,7 +50,7 @@ namespace Lmyc
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -56,6 +66,9 @@ namespace Lmyc
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            context.Database.EnsureDeleted();
+            context.Database.Migrate();
 
             app.UseMvc(routes =>
             {
