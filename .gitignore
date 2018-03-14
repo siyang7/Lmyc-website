@@ -267,3 +267,4 @@ Lmyc/.vscode
 # Mac Files
 .dist
 Lmyc/.dist
+.DS_Store

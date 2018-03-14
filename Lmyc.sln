@@ -8,6 +8,8 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lmyc.Tests", "Lmyc.Tests\Lmyc.Tests.csproj", "{DD749689-A58A-412D-9109-B8AE202F1150}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LmycDataLib", "..\LmycDataLib\LmycDataLib.csproj", "{7CD0854C-2EE0-4B61-9929-9E045598180F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,18 @@ Global
 		{DD749689-A58A-412D-9109-B8AE202F1150}.Release|x64.Build.0 = Release|Any CPU
 		{DD749689-A58A-412D-9109-B8AE202F1150}.Release|x86.ActiveCfg = Release|Any CPU
 		{DD749689-A58A-412D-9109-B8AE202F1150}.Release|x86.Build.0 = Release|Any CPU
+		{7CD0854C-2EE0-4B61-9929-9E045598180F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CD0854C-2EE0-4B61-9929-9E045598180F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CD0854C-2EE0-4B61-9929-9E045598180F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7CD0854C-2EE0-4B61-9929-9E045598180F}.Debug|x64.Build.0 = Debug|Any CPU
+		{7CD0854C-2EE0-4B61-9929-9E045598180F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7CD0854C-2EE0-4B61-9929-9E045598180F}.Debug|x86.Build.0 = Debug|Any CPU
+		{7CD0854C-2EE0-4B61-9929-9E045598180F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CD0854C-2EE0-4B61-9929-9E045598180F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CD0854C-2EE0-4B61-9929-9E045598180F}.Release|x64.ActiveCfg = Release|Any CPU
+		{7CD0854C-2EE0-4B61-9929-9E045598180F}.Release|x64.Build.0 = Release|Any CPU
+		{7CD0854C-2EE0-4B61-9929-9E045598180F}.Release|x86.ActiveCfg = Release|Any CPU
+		{7CD0854C-2EE0-4B61-9929-9E045598180F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
