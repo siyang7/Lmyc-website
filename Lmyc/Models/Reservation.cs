@@ -46,7 +46,7 @@ namespace Lmyc.Models
         [Required(ErrorMessage = "Please provide valid members.")]
         public List<ApplicationUser> NonMemberCrew { get; set; }
 
-        [MaxLength(1024)]
+        [MaxLength(1024, ErrorMessage = "Itinerary cannot be more than 1024 character")]
         public string Itinerary { get; set; }
 
         [ScaffoldColumn(false)]
