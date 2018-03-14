@@ -16,13 +16,13 @@ namespace Lmyc.Models
         /**
          * Users First & Last Names.
          */
-        [StringLength(100, MinimumLength = 1)]
+        [StringLength(100, MinimumLength = 1, ErrorMessage ="First Name have to be between 1 to 100 charater")]
         [Required(ErrorMessage = "First Name field is required.")]
         [DataType(DataType.Text)]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
 
-        [StringLength(100, MinimumLength = 1)]
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Last Name have to be between 1 to 100 charater")]
         [Required(ErrorMessage = "Last Name field is required.")]
         [DataType(DataType.Text)]
         [DisplayName("Last Name")]

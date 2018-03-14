@@ -8,6 +8,7 @@ namespace Lmyc.Models
 {
     public class Boat
     {
+
         [Key]
         public string BoatId { get; set; }
 
@@ -22,7 +23,7 @@ namespace Lmyc.Models
         [DisplayName("Boat Photo")]
         public byte[] BoatPicture { get; set; }
 
-        [MaxLength(500)]
+        [MaxLength(500, ErrorMessage = "The Description cannot be more than 500 character")]
         [DisplayName("Boat Description")]
         [Required(ErrorMessage = "Please provide a Description.")]
         public string BoatDescription { get; set; }
@@ -32,17 +33,18 @@ namespace Lmyc.Models
         [Range(1.00, 100000.00, ErrorMessage = "Length must be between 1 and 100,000")]
         public double BoatLength { get; set; }
 
-        [MaxLength(150)]
+        [MaxLength(150, ErrorMessage = "Boats Make cannot be more than 150 character")]
         [DisplayName("Boats Make")]
         [Required(ErrorMessage = "Please provide a Make.")]
         public string BoatMake { get; set; }
 
+ 
         [DisplayName("Year Boat Was Made")]
         [Required(ErrorMessage = "Please provide a Boat Year.")]
         [Range(1800, 2018, ErrorMessage = "Please provide a valid year.")]
         public int BoatYear { get; set; }
 
-        [Range(0, 1000)]
+        [Range(0, 1000, ErrorMessage = "Credits per hour have to be between 0 to 1000")]
         [DisplayName("Credits Per Hour Of Usage")]
         public int CreditsPerHourOfUsage { get; set; }
 

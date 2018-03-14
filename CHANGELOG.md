@@ -5,12 +5,16 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.0]
 ### 2018-03-13
-* Add user, boat, and reservation models
-* setup docker yml files
-* Add enumerators status
+#### Added
+* Add user, boat, and reservation models -JC
+* setup docker yml files -JC
+* Add enumerators status -JC
 
 #### Changed
-* Modify register view and controller
+* Updated Error message for Boat Model -CL
+* Updated Error message for User Model -CL
+* Updated Error message for Reservation Model -CL
+* Modify register view and controller -JC
 
 ## [0.0.2]
 ### 2018-03-09
