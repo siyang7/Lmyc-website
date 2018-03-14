@@ -6,6 +6,11 @@ an API/JavaScript solution that can be injected into the new WordPress site.
 
 
 ## Getting Started
+Basic Docker command
+Start containers (`docker-compose -f docker-compose.yml up`)
+View all your containers (`docker ps -a`)
+Shut down a container (`docker stop [containerId]`)
+Remove a container (`docker rm [containerId]`)
 
 Fork the github repository to your own repository.
 Follow the following to submit a pull requests
