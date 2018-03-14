@@ -137,6 +137,7 @@ DocProject/Help/html
 
 # Click-Once directory
 publish/
+dist/
 
 # Publish Web Output
 *.[Pp]ublish.xml
@@ -267,3 +268,4 @@ Lmyc/.vscode
 # Mac Files
 .dist
 Lmyc/.dist
+.DS_Store

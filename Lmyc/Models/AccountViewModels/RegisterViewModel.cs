@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,24 @@ namespace Lmyc.Models.AccountViewModels
 {
     public class RegisterViewModel
     {
+        /**
+         * Users First & Last Names.
+         */
+        [StringLength(100, MinimumLength = 1)]
+        [Required(ErrorMessage = "First Name field is required.")]
+        [DataType(DataType.Text)]
+        [DisplayName("First Name")]
+        public string FirstName { get; set; }
+
+        [StringLength(100, MinimumLength = 1)]
+        [Required(ErrorMessage = "Last Name field is required.")]
+        [DataType(DataType.Text)]
+        [DisplayName("Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        public string HomePhone { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
