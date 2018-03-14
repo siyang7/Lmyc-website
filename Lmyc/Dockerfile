@@ -6,7 +6,12 @@ FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
 COPY *.sln ./
 COPY Lmyc/Lmyc.csproj Lmyc/
-RUN dotnet restore
+COPY LmycDataLib/LmycDataLib.csproj LmycDataLib/
+COPY Lmyc.Tests/Lmyc.Tests.csproj Lmyc.Tests/
+COPY docker-compose.dcproj /src/
+RUN dotnet restore Lmyc/Lmyc.csproj
+RUN dotnet restore LmycDataLib/LmycDataLib.csproj
+RUN dotnet restore Lmyc.Tests/Lmyc.Tests.csproj
 COPY . .
 WORKDIR /src/Lmyc
 RUN dotnet build -c Release -o /app
