@@ -102,15 +102,15 @@ namespace Lmyc.Models
         /**
          * Credit Tracking Information.
          */
-        [DisplayName(“Starting Credits.“)]
+        [DisplayName("Starting Credits")]
         [Range(0, 1000)]
         public int StartingCredit { get; set; }
 
-        [DisplayName(“Used Credits.“)]
+        [DisplayName("Used Credits")]
         [Range(0, 1000)]
         public int UsedCredits { get; set; }
 
-        [DisplayName(“Credit Balance.“)]
+        [DisplayName("Credit Balance")]
         [Range(0, 1000)]
         public int CreditBalance { get; set; }
 
