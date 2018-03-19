@@ -33,7 +33,7 @@ namespace Lmyc
 
             var host = Configuration["DBHOST"] ?? "localhost";
             var port = Configuration["DBPORT"] ?? "3306";
-            var password = Configuration["DBPASSWORD"] ?? "convoluted";
+            var password = Configuration["DBPASSWORD"] ?? "secret";
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
