@@ -31,37 +31,87 @@ namespace Lmyc.Models
         /**
          * User address details.
          */
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Street field must be between 1 & 100 characters")]
+        [Required(ErrorMessage = "Street field is required.")]
+        [DataType(DataType.Text)]
         public string Street { get; set; }
+
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "City field must be between 1 & 100 characters")]
+        [Required(ErrorMessage = "Street field is required.")]
+        [DataType(DataType.Text)]
         public string City { get; set; }
+
+        [Required(ErrorMessage = "Postal code field is required.")]
+        [DataType(DataType.Text)]
+        [DisplayName("Postal Code")]
         public string PostalCode { get; set; }
+
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Country must be between 1 & 100 characters")]
+        [Required(ErrorMessage = "Country field is required.")]
+        [DataType(DataType.Text)]
         public string Country { get; set; }
 
         /**
          * Users Phone numbers.
          */
-        [Required]
+        [Required(ErrorMessage = "At least a home phone number is required.")]
+        [DataType(DataType.Text)]
+        [DisplayName("Home Phone")]
+        [Phone]
         public string HomePhone { get; set; }
+
+        [DataType(DataType.Text)]
+        [DisplayName("Mobile Phone")]
+        [Phone]
         public string MobilePhone { get; set; }
+
+        [DataType(DataType.Text)]
+        [DisplayName("Work Phone")]
+        [Phone]
         public string WorkPhone { get; set; }
 
         /**
          * Emergency Contact Phone Numbers
          */
+        [Required(ErrorMessage = "At least one emergency contact number is required.")]
+        [DisplayName("First Emergency Phone")]
+        [Phone]
         public string EmergencyContactOnePhone { get; set; }
+
+        [DisplayName("Second Emergency Phone")]
+        [Phone]
         public string EmergencyContactTwoPhone { get; set; }
 
         /**
          * User skills and qualifications.
          */
+        [Required(ErrorMessage = "Your sailing qualifications is needed.")]
+        [DisplayName("Sailing Qualifications")]
+        [DataType(DataType.Text)]
         public string SailingQualifications { get; set; }
+
+        [Required(ErrorMessage = "Your sailing qualifications is needed.")]
+        [DataType(DataType.Text)]
         public string Skills { get; set; }
+
+        [Required(ErrorMessage = "Your sailing experience is needed.")]
+        [DataType(DataType.Text)]
+        [DisplayName("Sailing Experience")]
         public string SailingExperience { get; set; }
 
         /**
          * Credit Tracking Information.
          */
+        [DisplayName("Starting Credits")]
+        [Range(0, 1000)]
         public int StartingCredit { get; set; }
+
+        [DisplayName("Used Credits")]
+        [Range(0, 1000)]
         public int UsedCredits { get; set; }
+
+        [DisplayName("Credit Balance")]
+        [Range(0, 1000)]
         public int CreditBalance { get; set; }
 
         /**
