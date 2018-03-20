@@ -1,7 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) ,
+##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen Li (ML)
+
+## [0.1.1]
+### 2018-03-19
+#### Added
+* Boat controller and views -ML
+* A workaround to the "No parameterless constructor defined for this object" error when trying to create a controller. Check Startup.cs
+
 
 ## [0.1.0]
 ### 2018-03-13
