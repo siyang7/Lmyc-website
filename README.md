@@ -19,7 +19,9 @@ Docker
 
 ### Useful Command
 View all your containers (`docker ps -a`)
+
 Shut down a container (`docker stop [containerId]`)
+
 Remove a container (`docker rm [containerId]`)
 
 ### Git Control
