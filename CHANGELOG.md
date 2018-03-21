@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 ##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen Li (ML)
 
 ## [0.1.1]
+### 2018-03-20
+#### Changed
+* Clean up docker configuration files - JC
+* Update README - JC
+
 ### 2018-03-13
 #### Added
 * Boat API Controller - ML
@@ -11,15 +16,15 @@ All notable changes to this project will be documented in this file.
 ## [0.1.0]
 ### 2018-03-13
 #### Added
-* Add user, boat, and reservation models -JC
-* setup docker yml files -JC
-* Add enumerators status -JC
+* Add user, boat, and reservation models - JC
+* setup docker yml files - JC
+* Add enumerators status - JC
 
 #### Changed
-* Updated Error message for Boat Model -CL
-* Updated Error message for User Model -CL
-* Updated Error message for Reservation Model -CL
-* Modify register view and controller -JC
+* Updated Error message for Boat Model - CL
+* Updated Error message for User Model - CL
+* Updated Error message for Reservation Model - CL
+* Modify register view and controller - JC
 
 ## [0.0.2]
 ### 2018-03-09

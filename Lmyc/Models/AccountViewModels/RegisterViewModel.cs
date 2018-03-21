@@ -10,7 +10,7 @@ namespace Lmyc.Models.AccountViewModels
     public class RegisterViewModel
     {
         /**
-         * Users First & Last Names.
+         * Users First and Last Names.
          */
         [StringLength(100, MinimumLength = 1)]
         [Required(ErrorMessage = "First Name field is required.")]
