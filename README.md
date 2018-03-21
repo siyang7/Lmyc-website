@@ -6,13 +6,25 @@ an API/JavaScript solution that can be injected into the new WordPress site.
 
 
 ## Getting Started
-Basic Docker command
-Start containers (`docker-compose -f docker-compose.yml up`)
+To Run this:
+1. Restore dependencies (`dotnet restore`)
+2. Build .NET project (`dotnet build`)
+3. Publish .NET project (`dotnet publish -o dist`)
+4. Start containers (`docker-compose -f docker-compose.yml up`)
+
+### Prerequisites
+```
+Docker
+```
+
+### Useful Command
 View all your containers (`docker ps -a`)
 Shut down a container (`docker stop [containerId]`)
 Remove a container (`docker rm [containerId]`)
 
+### Git Control
 Fork the github repository to your own repository.
+
 Follow the following to submit a pull requests
 1. Create a feature branch on your own repo (`Git branch {Team}-{label}-name-of-your-branch`)
 2. Switch to feature branch (`Git checkout name-of-your-branch`)
@@ -25,15 +37,10 @@ Follow the following to submit a pull requests
 9. push your local repo to your personal repo (`git push --set-upstream origin {feature/fix}-name-of-your-branch`)
 10. Create a pull request on github from your
 
-### Prerequisites
-```
-Docker
-```
-
 ### Coding style
 
 Comment everything with C # comment
-follow the comment standard on [Document your code with XML comments]https://docs.microsoft.com/en-us/dotnet/csharp/codedoc
+follow the comment standard on [Document your code with XML comments](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc)
 
 ## Testing
 
