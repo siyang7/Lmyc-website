@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3'
 
 volumes:
   datafiles:
@@ -12,8 +12,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_TCP_PORT: 3306
-
-  lmyc:
+  LMYC:
     image: lmyc
     build:
       context: .
@@ -22,7 +21,6 @@ services:
       - db
     ports:
       - "8888:80"
-    restart: always
     environment:
       - DBHOST=db
       - DBPORT=3306
