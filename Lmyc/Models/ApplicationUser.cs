@@ -14,7 +14,7 @@ namespace Lmyc.Models
     public class ApplicationUser : IdentityUser
     {
         /**
-         * Users First & Last Names.
+         * Users First and Last Names.
          */
         [StringLength(100, MinimumLength = 1, ErrorMessage ="First Name have to be between 1 to 100 charater")]
         [Required(ErrorMessage = "First Name field is required.")]
@@ -115,7 +115,7 @@ namespace Lmyc.Models
         public int CreditBalance { get; set; }
 
         /**
-         * Member & Skipper Status.
+         * Member and Skipper Status.
          */
         [ScaffoldColumn(false)]
         public MemberStatus MemberStatus { get; set; }
