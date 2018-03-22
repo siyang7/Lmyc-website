@@ -92,7 +92,7 @@ namespace Lmyc
 
             app.UseAuthentication();
 
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.Migrate();
 
             app.UseMvc(routes =>
