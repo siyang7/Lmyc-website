@@ -22,8 +22,7 @@ namespace Lmyc.Controllers
         // GET: Boats
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Boats.Include(b => b.User);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Boats.ToListAsync());
         }
 
         // GET: Boats/Details/5
@@ -35,7 +34,6 @@ namespace Lmyc.Controllers
             }
 
             var boat = await _context.Boats
-                .Include(b => b.User)
                 .SingleOrDefaultAsync(m => m.BoatId == id);
             if (boat == null)
             {
@@ -48,7 +46,6 @@ namespace Lmyc.Controllers
         // GET: Boats/Create
         public IActionResult Create()
         {
-            ViewData["CreatedBy"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -57,7 +54,7 @@ namespace Lmyc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BoatId,BoatName,BoatStatus,BoatPicture,BoatDescription,BoatLength,BoatMake,BoatYear,CreditsPerHourOfUsage,CreatedBy")] Boat boat)
+        public async Task<IActionResult> Create([Bind("BoatId,BoatName,BoatStatus,BoatPicture,BoatDescription,BoatLength,BoatMake,BoatYear,CreditsPerHourOfUsage")] Boat boat)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +62,6 @@ namespace Lmyc.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CreatedBy"] = new SelectList(_context.Users, "Id", "Id", boat.CreatedBy);
             return View(boat);
         }
 
@@ -82,7 +78,6 @@ namespace Lmyc.Controllers
             {
                 return NotFound();
             }
-            ViewData["CreatedBy"] = new SelectList(_context.Users, "Id", "Id", boat.CreatedBy);
             return View(boat);
         }
 
@@ -91,7 +86,7 @@ namespace Lmyc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("BoatId,BoatName,BoatStatus,BoatPicture,BoatDescription,BoatLength,BoatMake,BoatYear,CreditsPerHourOfUsage,CreatedBy")] Boat boat)
+        public async Task<IActionResult> Edit(string id, [Bind("BoatId,BoatName,BoatStatus,BoatPicture,BoatDescription,BoatLength,BoatMake,BoatYear,CreditsPerHourOfUsage")] Boat boat)
         {
             if (id != boat.BoatId)
             {
@@ -118,7 +113,6 @@ namespace Lmyc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CreatedBy"] = new SelectList(_context.Users, "Id", "Id", boat.CreatedBy);
             return View(boat);
         }
 
@@ -131,7 +125,6 @@ namespace Lmyc.Controllers
             }
 
             var boat = await _context.Boats
-                .Include(b => b.User)
                 .SingleOrDefaultAsync(m => m.BoatId == id);
             if (boat == null)
             {
