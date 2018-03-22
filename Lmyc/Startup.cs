@@ -28,9 +28,15 @@ namespace Lmyc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /* NOTE:
+             * If you want to add a controller, uncomment the two line below and comment
+             * the section between the arrow comments. Once you're done, change the sections
+             * you edited back to how they were.
+             **/
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Lmyc")));
 
+            /* vvvvvv */
             var host = Configuration["DBHOST"] ?? "localhost";
             var port = Configuration["DBPORT"] ?? "3306";
             var password = Configuration["DBPASSWORD"] ?? "secret";
@@ -40,6 +46,7 @@ namespace Lmyc
                 options.UseMySql($"server={host}; userid=root; pwd={password};"
                     + $"port={port}; database=lmyc");
             });
+            /* ^^^^^^ */
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
