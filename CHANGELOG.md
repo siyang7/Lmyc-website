@@ -6,9 +6,8 @@ All notable changes to this project will be documented in this file.
 ## [0.1.1]
 ### 2018-03-19
 #### Added
-* Boat controller and views -ML
-* A workaround to the "No parameterless constructor defined for this object" error when trying to create a controller. Check Startup.cs
-
+* Boat API Controller, regular controller and views -ML
+* A workaround in Startup.cs to the "No parameterless constructor defined for this object" error when trying to create a controller. Check Startup.cs - ML
 
 ## [0.1.0]
 ### 2018-03-13
