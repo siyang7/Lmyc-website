@@ -1,5 +1,4 @@
-﻿using LmycEntityLib.Enum;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,6 +16,7 @@ namespace Lmyc.Models
         [Required(ErrorMessage = "Please provide a Boat Name.")]
         public string BoatName { get; set; }
 
+        [DisplayName("Boat Status")]
         public BoatStatus BoatStatus { get; set; }
 
         [MaxLength(1024)]
@@ -47,12 +47,14 @@ namespace Lmyc.Models
         [Range(0, 1000, ErrorMessage = "Credits per hour have to be between 0 to 1000")]
         [DisplayName("Credits Per Hour Of Usage")]
         public int CreditsPerHourOfUsage { get; set; }
+    }
 
-        [ForeignKey("User")]
-        [DisplayName("Created By")]
-        public string CreatedBy { get; set; }
-
-        [ScaffoldColumn(false)]
-        public ApplicationUser User { get; set; }
+    public enum BoatStatus
+    {
+        [Display(Name="Out of service")]
+        OutOfService,
+        Operational,
+        Scrapped,
+        Sold
     }
 }

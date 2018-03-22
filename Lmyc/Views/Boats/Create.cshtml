@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="BoatStatus" class="control-label"></label>
-                <select asp-for="BoatStatus" class="form-control"></select>
+                <select asp-for="BoatStatus" asp-items="Html.GetEnumSelectList<BoatStatus>()" class="form-control"></select>
                 <span asp-validation-for="BoatStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,10 +51,6 @@
                 <label asp-for="CreditsPerHourOfUsage" class="control-label"></label>
                 <input asp-for="CreditsPerHourOfUsage" class="form-control" />
                 <span asp-validation-for="CreditsPerHourOfUsage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedBy" class="control-label"></label>
-                <select asp-for="CreatedBy" class ="form-control" asp-items="ViewBag.CreatedBy"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

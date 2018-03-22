@@ -18,6 +18,7 @@ namespace Lmyc.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -220,7 +221,22 @@ namespace Lmyc.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { FirstName = model.FirstName, LastName = model.LastName, HomePhone = model.HomePhone, UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    HomePhone = model.HomePhone,
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Street = model.Street,
+                    City = model.City,
+                    Country = model.Country,
+                    PostalCode = model.PostalCode,
+                    SailingExperience = model.SailingExperience,
+                    Skills = model.Skills,
+                    SailingQualifications = model.SailingQualifications,
+                    EmergencyContactOnePhone = model.EmergencyContactOnePhone
+                };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -24,8 +24,35 @@ namespace Lmyc.Models.AccountViewModels
         [DisplayName("Last Name")]
         public string LastName { get; set; }
 
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Street field must be between 1 & 100 characters")]
+        [Required(ErrorMessage = "Street field is required.")]
+        [DataType(DataType.Text)]
+        public string Street { get; set; }
+
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "City field must be between 1 & 100 characters")]
+        [Required(ErrorMessage = "Street field is required.")]
+        [DataType(DataType.Text)]
+        public string City { get; set; }
+
+        [Required(ErrorMessage = "Postal code field is required.")]
+        [DataType(DataType.Text)]
+        [DisplayName("Postal Code")]
+        public string PostalCode { get; set; }
+
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Country must be between 1 & 100 characters")]
+        [Required(ErrorMessage = "Country field is required.")]
+        [DataType(DataType.Text)]
+        public string Country { get; set; }
+
         [Required]
+        [DisplayName("Home Phone")]
+        [Phone]
         public string HomePhone { get; set; }
+
+        [Required(ErrorMessage = "At least one emergency contact number is required.")]
+        [DisplayName("First Emergency Phone")]
+        [Phone]
+        public string EmergencyContactOnePhone { get; set; }
 
         [Required]
         [EmailAddress]
@@ -42,5 +69,19 @@ namespace Lmyc.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Your sailing qualifications is needed.")]
+        [DisplayName("Sailing Qualifications")]
+        [DataType(DataType.Text)]
+        public string SailingQualifications { get; set; }
+
+        [Required(ErrorMessage = "Your sailing qualifications is needed.")]
+        [DataType(DataType.Text)]
+        public string Skills { get; set; }
+
+        [Required(ErrorMessage = "Your sailing experience is needed.")]
+        [DataType(DataType.Text)]
+        [DisplayName("Sailing Experience")]
+        public string SailingExperience { get; set; }
     }
 }
