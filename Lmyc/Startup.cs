@@ -30,8 +30,8 @@ namespace Lmyc
         {
             /* NOTE:
              * If you want to add a controller, uncomment the two line below and comment
-             * the section between the arrow comments. Once you're done, change the parts
-             * back to how they were.
+             * the section between the arrow comments. Once you're done, change the sections
+             * you edited back to how they were.
              **/
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Lmyc")));
