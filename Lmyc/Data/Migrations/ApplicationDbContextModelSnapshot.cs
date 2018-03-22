@@ -29,12 +29,16 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<string>("Country");
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.Property<int>("CreditBalance");
 
@@ -43,7 +47,8 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("EmergencyContactOnePhone");
+                    b.Property<string>("EmergencyContactOnePhone")
+                        .IsRequired();
 
                     b.Property<string>("EmergencyContactTwoPhone");
 
@@ -78,25 +83,31 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<string>("PostalCode");
+                    b.Property<string>("PostalCode")
+                        .IsRequired();
 
                     b.Property<int?>("ReservationId");
 
                     b.Property<int?>("ReservationId1");
 
-                    b.Property<string>("SailingExperience");
+                    b.Property<string>("SailingExperience")
+                        .IsRequired();
 
-                    b.Property<string>("SailingQualifications");
+                    b.Property<string>("SailingQualifications")
+                        .IsRequired();
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<string>("Skills");
+                    b.Property<string>("Skills")
+                        .IsRequired();
 
                     b.Property<int>("SkipperStatus");
 
                     b.Property<int>("StartingCredit");
 
-                    b.Property<string>("Street");
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -150,13 +161,9 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<int>("BoatYear");
 
-                    b.Property<string>("CreatedBy");
-
                     b.Property<int>("CreditsPerHourOfUsage");
 
                     b.HasKey("BoatId");
-
-                    b.HasIndex("CreatedBy");
 
                     b.ToTable("Boats");
                 });
@@ -307,13 +314,6 @@ namespace Lmyc.Data.Migrations
                     b.HasOne("Lmyc.Models.Reservation")
                         .WithMany("NonMemberCrew")
                         .HasForeignKey("ReservationId1");
-                });
-
-            modelBuilder.Entity("Lmyc.Models.Boat", b =>
-                {
-                    b.HasOne("Lmyc.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("CreatedBy");
                 });
 
             modelBuilder.Entity("Lmyc.Models.Reservation", b =>

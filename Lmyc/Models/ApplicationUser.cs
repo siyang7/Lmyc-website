@@ -4,8 +4,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using LmycDataLib.Enum;
-using LmycEntityLib.Enum;
 using Microsoft.AspNetCore.Identity;
 
 namespace Lmyc.Models
@@ -117,10 +115,31 @@ namespace Lmyc.Models
         /**
          * Member and Skipper Status.
          */
-        [ScaffoldColumn(false)]
+        [DisplayName("Member Status")]
         public MemberStatus MemberStatus { get; set; }
-
-        [ScaffoldColumn(false)]
+        [DisplayName("Skipper Status")]
         public SkipperStatus SkipperStatus { get; set; }
+    }
+
+    public enum MemberStatus
+    {
+        [Display(Name = "Full member (Good)")]
+        FullMemberGoodStanding,
+        [Display(Name = "Full member (Pending)")]
+        FullMemberNotGoodStanding,
+        [Display(Name = "Associate member")]
+        AssociateMember,
+        Admin,
+        [Display(Name = "Booking moderator")]
+        BookingModerator
+    }
+
+    public enum SkipperStatus
+    {
+        Crew,
+        [Display(Name = "Day skipper")]
+        DaySkipper,
+        [Display(Name = "Cruise skipper")]
+        CruiseSkipper
     }
 }
