@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen (Paul) Li (ML)
 
+## [0.1.3]
+### 2018-03-22
+#### Added
+* Add Login and Register API
+* Use OpenIddict token authentication
+* Add token view models
+
 ## [0.1.2]
 ### 2018-03-20
 #### Changed
