@@ -41,9 +41,9 @@ namespace Lmyc
             //    options.UseOpenIddict();
             //});
           
-            //var host = Configuration["DBHOST"] ?? "localhost";
-            //var port = Configuration["DBPORT"] ?? "3306";
-            //var password = Configuration["DBPASSWORD"] ?? "secret";
+            var host = Configuration["DBHOST"] ?? "localhost";
+            var port = Configuration["DBPORT"] ?? "3306";
+            var password = Configuration["DBPASSWORD"] ?? "secret";
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
