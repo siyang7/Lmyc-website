@@ -40,7 +40,7 @@ namespace Lmyc
             //    // to replace the default OpenIddict entities.
             //    options.UseOpenIddict();
             //});
-
+          
             var host = Configuration["DBHOST"] ?? "localhost";
             var port = Configuration["DBPORT"] ?? "3306";
             var password = Configuration["DBPASSWORD"] ?? "secret";

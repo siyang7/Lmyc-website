@@ -19,7 +19,7 @@ namespace Lmyc.Models
         [DisplayName("Boat Status")]
         public BoatStatus BoatStatus { get; set; }
 
-        [MaxLength(1024)]
+        [MaxLength(int.MaxValue)]
         [DisplayName("Boat Photo")]
         public byte[] BoatPicture { get; set; }
 

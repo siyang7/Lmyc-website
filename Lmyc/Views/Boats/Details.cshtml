@@ -26,7 +26,7 @@
             @Html.DisplayNameFor(model => model.BoatPicture)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BoatPicture)
+            <img src="data:image;base64,@System.Convert.ToBase64String(Model.BoatPicture)" width="80" height="80" />
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.BoatDescription)
