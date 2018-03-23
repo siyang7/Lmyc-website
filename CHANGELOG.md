@@ -12,6 +12,9 @@ All notable changes to this project will be documented in this file.
 * Fix the Edit view to display status correctly - NC
 #### Added
 * Added control for image upload inside the BoatController.Create and Edit function - NC
+* Add Login and Register API
+* Use OpenIddict token authentication
+* Add token view models
 
 ## [0.1.2]
 ### 2018-03-20
