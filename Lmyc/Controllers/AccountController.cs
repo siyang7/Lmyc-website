@@ -16,7 +16,7 @@ using Lmyc.Services;
 
 namespace Lmyc.Controllers
 {
-    [Authorize]
+    
     [Route("[controller]/[action]")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class AccountController : Controller

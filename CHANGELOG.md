@@ -1,7 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen (Paul) Li (ML)
+##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen (Paul) Li (ML), Nate Chiang (NC)
+
+## [0.1.4]
+### 2018-03-24
+#### Changed
+* updated program.cs (run the seed method when program starts)-CL
+#### Added
+* BoatDummyData.cs -CL
+* DbInitializer.cs -CL
 
 ## [0.1.3]
 ### 2018-03-22
