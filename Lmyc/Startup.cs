@@ -31,6 +31,18 @@ namespace Lmyc
         {
             services.AddMvc();
 
+            // Online test database
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DevelopmentConnection"));
+
+                // Register the entity sets needed by OpenIddict.
+                // Note: use the generic overload if you need
+                // to replace the default OpenIddict entities.
+                options.UseOpenIddict();
+            });
+
+            // Local Database
             //services.AddDbContext<ApplicationDbContext>(options =>
             //{
             //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Lmyc"));
@@ -40,17 +52,19 @@ namespace Lmyc
             //    // to replace the default OpenIddict entities.
             //    options.UseOpenIddict();
             //});
-          
-            var host = Configuration["DBHOST"] ?? "localhost";
-            var port = Configuration["DBPORT"] ?? "3306";
-            var password = Configuration["DBPASSWORD"] ?? "secret";
+            
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                options.UseMySql($"server={host}; userid=root; pwd={password};"
-                    + $"port={port}; database=lmyc");
-                options.UseOpenIddict();
-            });
+            // Docker Database
+            //var host = Configuration["DBHOST"] ?? "localhost";
+            //var port = Configuration["DBPORT"] ?? "3306";
+            //var password = Configuration["DBPASSWORD"] ?? "secret";
+
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //{
+            //    options.UseMySql($"server={host}; userid=root; pwd={password};"
+            //        + $"port={port}; database=lmyc");
+            //    options.UseOpenIddict();
+            //});
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
