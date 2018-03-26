@@ -3,13 +3,22 @@ All notable changes to this project will be documented in this file.
 
 ##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen (Paul) Li (ML), Nate Chiang (NC)
 
+## [0.2.0]
+### 2018-03-26
+#### Added
+* Add online test database connection string - JC
+
+#### Changed
+* Modify reservation model - JC
+* re-migrate reservation model - JC
+
 ## [0.1.4]
 ### 2018-03-24
 #### Changed
-* updated program.cs (run the seed method when program starts)-CL
+* updated program.cs (run the seed method when program starts) - CL
 #### Added
-* BoatDummyData.cs -CL
-* DbInitializer.cs -CL
+* BoatDummyData.cs - CL
+* DbInitializer.cs - CL
 
 ## [0.1.3]
 ### 2018-03-22
