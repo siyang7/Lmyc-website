@@ -11,9 +11,9 @@ namespace LmycTests
         public void MaxLengthForUserFirstNameName()
         {
             ApplicationUser fuckJason= new ApplicationUser();
-            fuckJason.FirstName = "Fuck Jason . Com";
+            fuckJason.FirstName = "TEST";
             
-            Assert.Equal("Fuck Jason . Com", fuckJason.FirstName );
+            Assert.Equal("TEST", fuckJason.FirstName );
         }
 
     }
