@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen (Paul) Li (ML), Nate Chiang (NC)
 
+## [0.2.1]
+### 2018-03-31
+#### Added
+* VolunteerAPI controller - CL
+* VolunteerMVC controller - CL
+* VolunteerModel controller - CL
+
 ## [0.2.0]
 ### 2018-03-26
 #### Added
