@@ -42,33 +42,33 @@ namespace Lmyc
             //    options.UseOpenIddict();
             //});
 
-            // Local Database
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //{
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Lmyc"));
-
-            //    // Register the entity sets needed by OpenIddict.
-            //    // Note: use the generic overload if you need
-            //    // to replace the default OpenIddict entities.
-            //    options.UseOpenIddict();
-            //});
-
-
-            // Docker Database
-            var host = Configuration["DBHOST"] ?? "localhost";
-            var port = Configuration["DBPORT"] ?? "3306";
-            var password = Configuration["DBPASSWORD"] ?? "secret";
-
+            //Local Database
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseMySql($"server={host}; userid=root; pwd={password};"
-                    + $"port={port}; database=lmyc");
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Lmyc"));
+
+                // Register the entity sets needed by OpenIddict.
+                // Note: use the generic overload if you need
+                // to replace the default OpenIddict entities.
                 options.UseOpenIddict();
             });
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+
+            // Docker Database
+            //var host = Configuration["DBHOST"] ?? "localhost";
+            //var port = Configuration["DBPORT"] ?? "3306";
+            //var password = Configuration["DBPASSWORD"] ?? "secret";
+
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //{
+            //    options.UseMySql($"server={host}; userid=root; pwd={password};"
+            //        + $"port={port}; database=lmyc");
+            //    options.UseOpenIddict();
+            //});
+
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>()
+            //    .AddDefaultTokenProviders();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
