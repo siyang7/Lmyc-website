@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file.
 * VolunteerAPI controller - CL
 * VolunteerMVC controller - CL
 * VolunteerModel controller - CL
+* Added Test project - CL     
+* Create one test case - CL
 
 #### Changed
 * Fixed Castiel's mistake as he mistakenly dragged and dropped the entire model folder inside the DataLib library even thought there are no references inside the DataLib project - NC
