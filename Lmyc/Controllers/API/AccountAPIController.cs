@@ -54,12 +54,15 @@ namespace Lmyc.Controllers.API
                 Email = model.Email,
                 Street = model.Street,
                 City = model.City,
+                Province = model.Province,
                 Country = model.Country,
                 PostalCode = model.PostalCode,
                 SailingExperience = model.SailingExperience,
                 Skills = model.Skills,
                 SailingQualifications = model.SailingQualifications,
-                EmergencyContactOnePhone = model.EmergencyContactOnePhone
+                EmergencyContactOne = model.EmergencyContactOne,
+                StartingCredit = 1000,
+                MemberStatus = MemberStatus.Pending
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -67,7 +70,6 @@ namespace Lmyc.Controllers.API
 
             if (!result.Succeeded)
             {
-                //return CreatedAtAction(result);
                 return BadRequest();
             }
 

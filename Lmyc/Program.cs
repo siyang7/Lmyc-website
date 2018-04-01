@@ -4,10 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Lmyc.Data;
-using Lmyc.InitData;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -21,13 +20,15 @@ namespace Lmyc
             
             using (var scope = host.Services.CreateScope())
             {
+
                 var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<ApplicationDbContext>();
+
+                context.Database.Migrate();
+
                 try
                 {
-                    //Get a database context instance from the dependency injection container.
-                    var context = services.GetRequiredService<ApplicationDbContext>();
-                    //Call the seed method, passing to it the context.
-                    DbInitializer.Initialize(context);
+                    DbInitializer.Initialize(services).Wait();
                 }
                 catch (Exception ex)
                 {

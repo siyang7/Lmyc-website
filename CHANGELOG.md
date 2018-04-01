@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen (Paul) Li (ML), Nate Chiang (NC)
 
+## [0.2.2]
+### 2018-03-31
+#### Added
+* Add user roles - JC
+* Modify user model - JC
+* fix user controller - JC
+
 ## [0.2.1]
 ### 2018-03-31
 #### Added
@@ -14,6 +21,7 @@ All notable changes to this project will be documented in this file.
 
 #### Changed
 * Fixed Castiel's mistake as he mistakenly dragged and dropped the entire model folder inside the DataLib library even thought there are no references inside the DataLib project - NC
+
 ## [0.2.0]
 ### 2018-03-26
 #### Added

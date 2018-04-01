@@ -42,7 +42,7 @@ namespace Lmyc
             //    options.UseOpenIddict();
             //});
 
-            //Local Database
+            // Local Database
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Lmyc"));
@@ -142,9 +142,6 @@ namespace Lmyc
 
             app.UseAuthentication();
 
-            //context.Database.EnsureDeleted();
-            context.Database.Migrate();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -160,8 +157,6 @@ namespace Lmyc
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "LMYC API V1.0");
             });
-
-            app.UseMvc();
         }
     }
 }

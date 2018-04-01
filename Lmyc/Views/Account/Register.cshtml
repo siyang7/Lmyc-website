@@ -50,6 +50,11 @@
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Province"></label>
+                <input asp-for="Province" class="form-control" />
+                <span asp-validation-for="Province" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Country"></label>
                 <input asp-for="Country" class="form-control" />
                 <span asp-validation-for="Country" class="text-danger"></span>
@@ -75,9 +80,9 @@
                 <span asp-validation-for="SailingQualifications" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EmergencyContactOnePhone"></label>
-                <input asp-for="EmergencyContactOnePhone" class="form-control" />
-                <span asp-validation-for="EmergencyContactOnePhone" class="text-danger"></span>
+                <label asp-for="EmergencyContactOne"></label>
+                <input asp-for="EmergencyContactOne" class="form-control" />
+                <span asp-validation-for="EmergencyContactOne" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-default">Register</button>
         </form>

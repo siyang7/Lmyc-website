@@ -44,6 +44,11 @@ namespace Lmyc.Models
         [DisplayName("Postal Code")]
         public string PostalCode { get; set; }
 
+        [Required(ErrorMessage = "Province field is required.")]
+        [DataType(DataType.Text)]
+        [DisplayName("Province")]
+        public string Province { get; set; }
+
         [StringLength(100, MinimumLength = 1, ErrorMessage = "Country must be between 1 & 100 characters")]
         [Required(ErrorMessage = "Country field is required.")]
         [DataType(DataType.Text)]
@@ -53,17 +58,14 @@ namespace Lmyc.Models
          * Users Phone numbers.
          */
         [Required(ErrorMessage = "At least a home phone number is required.")]
-        [DataType(DataType.Text)]
         [DisplayName("Home Phone")]
         [Phone]
         public string HomePhone { get; set; }
-
-        [DataType(DataType.Text)]
+        
         [DisplayName("Mobile Phone")]
         [Phone]
         public string MobilePhone { get; set; }
-
-        [DataType(DataType.Text)]
+        
         [DisplayName("Work Phone")]
         [Phone]
         public string WorkPhone { get; set; }
@@ -72,13 +74,13 @@ namespace Lmyc.Models
          * Emergency Contact Phone Numbers
          */
         [Required(ErrorMessage = "At least one emergency contact number is required.")]
-        [DisplayName("First Emergency Phone")]
+        [DisplayName("First Emergency Contact")]
         [Phone]
-        public string EmergencyContactOnePhone { get; set; }
+        public string EmergencyContactOne { get; set; }
 
-        [DisplayName("Second Emergency Phone")]
+        [DisplayName("Second Emergency Contact")]
         [Phone]
-        public string EmergencyContactTwoPhone { get; set; }
+        public string EmergencyContactTwo { get; set; }
 
         /**
          * User skills and qualifications.
@@ -93,9 +95,8 @@ namespace Lmyc.Models
         public string Skills { get; set; }
 
         [Required(ErrorMessage = "Your sailing experience is needed.")]
-        [DataType(DataType.Text)]
         [DisplayName("Sailing Experience")]
-        public string SailingExperience { get; set; }
+        public int SailingExperience { get; set; }
 
         /**
          * Credit Tracking Information.
@@ -123,15 +124,10 @@ namespace Lmyc.Models
 
     public enum MemberStatus
     {
-        [Display(Name = "Full member (Good)")]
-        FullMemberGoodStanding,
-        [Display(Name = "Full member (Pending)")]
-        FullMemberNotGoodStanding,
-        [Display(Name = "Associate member")]
-        AssociateMember,
-        Admin,
-        [Display(Name = "Booking moderator")]
-        BookingModerator
+        [Display(Name = "Approved")]
+        Approved,
+        [Display(Name = "Pending")]
+        Pending
     }
 
     public enum SkipperStatus
