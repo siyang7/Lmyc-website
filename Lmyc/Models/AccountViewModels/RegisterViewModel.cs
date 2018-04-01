@@ -34,6 +34,11 @@ namespace Lmyc.Models.AccountViewModels
         [DataType(DataType.Text)]
         public string City { get; set; }
 
+        [Required(ErrorMessage = "Province field is required.")]
+        [DataType(DataType.Text)]
+        [DisplayName("Province")]
+        public string Province { get; set; }
+
         [Required(ErrorMessage = "Postal code field is required.")]
         [DataType(DataType.Text)]
         [DisplayName("Postal Code")]
@@ -52,7 +57,7 @@ namespace Lmyc.Models.AccountViewModels
         [Required(ErrorMessage = "At least one emergency contact number is required.")]
         [DisplayName("First Emergency Phone")]
         [Phone]
-        public string EmergencyContactOnePhone { get; set; }
+        public string EmergencyContactOne { get; set; }
 
         [Required]
         [EmailAddress]
@@ -80,8 +85,7 @@ namespace Lmyc.Models.AccountViewModels
         public string Skills { get; set; }
 
         [Required(ErrorMessage = "Your sailing experience is needed.")]
-        [DataType(DataType.Text)]
         [DisplayName("Sailing Experience")]
-        public string SailingExperience { get; set; }
+        public int SailingExperience { get; set; }
     }
 }
