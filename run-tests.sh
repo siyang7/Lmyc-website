@@ -1,1 +1,1 @@
-dotnet test Lmyc.Tests
+dotnet test LmycTests
