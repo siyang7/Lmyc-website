@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen (Paul) Li (ML), Nate Chiang (NC)
 
+## [0.2.3]
+### 2018-04-02
+#### Changed
+* Fix boat seeding data - JC
+* Delete old tests - JC
+
 ## [0.2.2]
 ### 2018-03-31
 #### Added
