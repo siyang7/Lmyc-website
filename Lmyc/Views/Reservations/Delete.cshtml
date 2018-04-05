@@ -24,6 +24,12 @@
             @Html.DisplayFor(model => model.EndDateTime)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.NonMemberCrew)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NonMemberCrew)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Itinerary)
         </dt>
         <dd>
@@ -42,16 +48,16 @@
             @Html.DisplayFor(model => model.AllocatedHours)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Boat)
+            @Html.DisplayNameFor(model => model.Boat.BoatName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Boat.BoatId)
+            @Html.DisplayFor(model => model.Boat.BoatName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.User)
+            Name
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.User.Id)
+            @Html.DisplayFor(model => model.User.FirstName) @Html.DisplayFor(model => model.User.LastName)
         </dd>
     </dl>
     

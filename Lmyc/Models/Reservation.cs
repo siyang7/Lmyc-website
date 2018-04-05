@@ -10,21 +10,8 @@ namespace Lmyc.Models
 {
     public class Reservation
     {
+        [Key]
         public int ReservationId { get; set; }
-
-        [ForeignKey("User")]
-        [DisplayName("Created By")]
-        public string CreatedBy { get; set; }
-
-        [ScaffoldColumn(false)]
-        public ApplicationUser User { get; set; }
-
-        [ForeignKey("Boat")]
-        [DisplayName("Boat Name")]
-        public string ReservedBoat { get; set; }
-
-        [ScaffoldColumn(false)]
-        public Boat Boat { get; set; }
 
         [Required(ErrorMessage = "Start Date Time is required.")]
         [DataType(DataType.Date)]
@@ -38,10 +25,6 @@ namespace Lmyc.Models
         [DisplayName("To Date")]
         public DateTime EndDateTime { get; set; }
 
-        [DisplayName("Member Crew")]
-        [Required(ErrorMessage = "Please provide valid members.")]
-        public List<ApplicationUser> MemberCrew { get; set; }
-
         [DisplayName("Non-Member Crew")]
         [Required(ErrorMessage = "Please provide valid members.")]
         public string NonMemberCrew { get; set; }
@@ -50,6 +33,22 @@ namespace Lmyc.Models
         public string Itinerary { get; set; }
 
         public double AllocatedCredit { get; set; }
+
         public double AllocatedHours { get; set; }
+
+        [DisplayName("Member Crew")]
+        [Required(ErrorMessage = "Please provide valid members.")]
+        public List<ApplicationUser> MemberCrew { get; set; }
+
+        [ForeignKey("User")]
+        [DisplayName("Created By")]
+        public string CreatedBy { get; set; }
+
+        public ApplicationUser User { get; set; }
+
+        [ForeignKey("Boat")]
+        public int BoatId { get; set; }
+
+        public Boat Boat { get; set; }
     }
 }

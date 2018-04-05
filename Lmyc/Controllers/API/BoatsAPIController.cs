@@ -30,7 +30,7 @@ namespace Lmyc.Controllers.API
 
         // GET: api/BoatsAPI/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBoat([FromRoute] string id)
+        public async Task<IActionResult> GetBoat([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -49,7 +49,7 @@ namespace Lmyc.Controllers.API
 
         // PUT: api/BoatsAPI/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBoat([FromRoute] string id, [FromBody] Boat boat)
+        public async Task<IActionResult> PutBoat([FromRoute] int id, [FromBody] Boat boat)
         {
             if (!ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace Lmyc.Controllers.API
 
         // DELETE: api/BoatsAPI/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBoat([FromRoute] string id)
+        public async Task<IActionResult> DeleteBoat([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -118,7 +118,7 @@ namespace Lmyc.Controllers.API
             return Ok(boat);
         }
 
-        private bool BoatExists(string id)
+        private bool BoatExists(int id)
         {
             return _context.Boats.Any(e => e.BoatId == id);
         }

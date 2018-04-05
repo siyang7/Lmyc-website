@@ -25,14 +25,7 @@ namespace Lmyc.Controllers.MVC
         // GET: Reservations
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.GetUserAsync(User);
-
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            var applicationDbContext = _context.Reservations.Include(r => r.Boat);
+            var applicationDbContext = _context.Reservations.Include(r => r.Boat).Include(r => r.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -59,8 +52,8 @@ namespace Lmyc.Controllers.MVC
         // GET: Reservations/Create
         public IActionResult Create()
         {
-            ViewData["ReservedBoat"] = new SelectList(_context.Boats, "BoatName", "BoatName");
-            ViewData["MemberCrew"] = new SelectList(_context.Users, "Id", "Username");
+            ViewData["Boat"] = new SelectList(_context.Boats, "BoatId", "BoatName");
+            ViewData["MemberCrew"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
@@ -69,22 +62,81 @@ namespace Lmyc.Controllers.MVC
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReservationId,ReservedBoat,StartDateTime,EndDateTime,Itinerary,AllocatedCredit,AllocatedHours")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("ReservationId,StartDateTime,EndDateTime,NonMemberCrew,Itinerary,AllocatedCredit,AllocatedHours,MemberCrew,BoatId")] Reservation reservation)
         {
-            // Trying to make it valid.. and failing
-            //var user = await _userManager.GetUserAsync(User);
-            //reservation.User = user ?? throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            //reservation.Boat = await _context.Boats.FirstAsync(b => b.BoatName == reservation.ReservedBoat);
-            //reservation.CreatedBy = user.UserName;
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
-                reservation.User = user ?? throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+
+                if (user == null)
+                {
+                    return BadRequest();
+                }
+
+                reservation.CreatedBy = user.Id;
+                
+
                 _context.Add(reservation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ReservedBoat"] = new SelectList(_context.Boats, "BoatName", "BoatName", reservation.ReservedBoat);
+            ViewData["Boat"] = new SelectList(_context.Boats, "BoatId", "BoatName", reservation.BoatId);
+            ViewData["MemberCrew"] = new SelectList(_context.Users, "Id", "UserName", reservation.MemberCrew);
+            return View(reservation);
+        }
+
+        // GET: Reservations/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var reservation = await _context.Reservations.SingleOrDefaultAsync(m => m.ReservationId == id);
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+            ViewData["Boat"] = new SelectList(_context.Boats, "BoatId", "BoatName", reservation.BoatId);
+            ViewData["MemberCrew"] = new SelectList(_context.Users, "Id", "UserName", reservation.MemberCrew);
+            return View(reservation);
+        }
+
+        // POST: Reservations/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ReservationId,StartDateTime,EndDateTime,NonMemberCrew,Itinerary,AllocatedCredit,AllocatedHours,CreatedBy,BoatId")] Reservation reservation)
+        {
+            if (id != reservation.ReservationId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(reservation);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ReservationExists(reservation.ReservationId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["BoatId"] = new SelectList(_context.Boats, "BoatId", "BoatDescription", reservation.BoatId);
+            ViewData["CreatedBy"] = new SelectList(_context.Users, "Id", "Id", reservation.CreatedBy);
             return View(reservation);
         }
 
