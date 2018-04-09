@@ -28,18 +28,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="NonMemberCrew" class="control-label"></label>
-                <input asp-for="NonMemberCrew" class="form-control" />
+                <input class="form-control" id=""/>
                 <span asp-validation-for="NonMemberCrew" class="text-danger"></span>
+                <input type="hidden" value="" asp-for="NonMemberCrew" id="nonMembers"/>
+                <a id="addToNonCrew" class="btn btn-default">Add to crew</a>
             </div>
+
             <div class="form-group">
                 <label asp-for="Itinerary" class="control-label"></label>
                 <input asp-for="Itinerary" class="form-control" />
                 <span asp-validation-for="Itinerary" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AllocatedCredit" class="control-label"></label>
-                <input asp-for="AllocatedCredit" class="form-control" />
-                <span asp-validation-for="AllocatedCredit" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AllocatedHours" class="control-label"></label>
@@ -48,7 +46,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="MemberCrew" class="control-label"></label>
-                <select asp-for="MemberCrew" class="form-control" asp-items="ViewBag.MemberCrew"></select>
+                <select class="form-control" asp-items="ViewBag.MemberCrew"></select>
+                <input asp-for="MemberCrew" type="hidden" value="" id="members"/>
+                <a id="addToCrew" class="btn btn-default">Add to crew</a>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -64,3 +64,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+

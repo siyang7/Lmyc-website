@@ -170,8 +170,6 @@ namespace Lmyc.Data.Migrations
                     b.Property<int>("ReservationId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("AllocatedCredit");
-
                     b.Property<double>("AllocatedHours");
 
                     b.Property<int>("BoatId");

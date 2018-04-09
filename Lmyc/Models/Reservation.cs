@@ -32,8 +32,6 @@ namespace Lmyc.Models
         [MaxLength(1024, ErrorMessage = "Itinerary cannot be more than 1024 character")]
         public string Itinerary { get; set; }
 
-        public double AllocatedCredit { get; set; }
-
         public double AllocatedHours { get; set; }
 
         [DisplayName("Member Crew")]
