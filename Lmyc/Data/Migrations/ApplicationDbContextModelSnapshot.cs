@@ -90,8 +90,6 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<int?>("ReservationId");
 
-                    b.Property<int?>("ReservationId1");
-
                     b.Property<int>("SailingExperience");
 
                     b.Property<string>("SailingQualifications")
@@ -131,14 +129,12 @@ namespace Lmyc.Data.Migrations
 
                     b.HasIndex("ReservationId");
 
-                    b.HasIndex("ReservationId1");
-
                     b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Lmyc.Models.Boat", b =>
                 {
-                    b.Property<string>("BoatId")
+                    b.Property<int>("BoatId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("BoatDescription")
@@ -178,6 +174,8 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<double>("AllocatedHours");
 
+                    b.Property<int>("BoatId");
+
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTime>("EndDateTime");
@@ -185,15 +183,16 @@ namespace Lmyc.Data.Migrations
                     b.Property<string>("Itinerary")
                         .HasMaxLength(1024);
 
-                    b.Property<string>("ReservedBoat");
+                    b.Property<string>("NonMemberCrew")
+                        .IsRequired();
 
                     b.Property<DateTime>("StartDateTime");
 
                     b.HasKey("ReservationId");
 
-                    b.HasIndex("CreatedBy");
+                    b.HasIndex("BoatId");
 
-                    b.HasIndex("ReservedBoat");
+                    b.HasIndex("CreatedBy");
 
                     b.ToTable("Reservations");
                 });
@@ -470,21 +469,18 @@ namespace Lmyc.Data.Migrations
                     b.HasOne("Lmyc.Models.Reservation")
                         .WithMany("MemberCrew")
                         .HasForeignKey("ReservationId");
-
-                    b.HasOne("Lmyc.Models.Reservation")
-                        .WithMany("NonMemberCrew")
-                        .HasForeignKey("ReservationId1");
                 });
 
             modelBuilder.Entity("Lmyc.Models.Reservation", b =>
                 {
+                    b.HasOne("Lmyc.Models.Boat", "Boat")
+                        .WithMany()
+                        .HasForeignKey("BoatId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Lmyc.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("CreatedBy");
-
-                    b.HasOne("Lmyc.Models.Boat", "Boat")
-                        .WithMany()
-                        .HasForeignKey("ReservedBoat");
                 });
 
             modelBuilder.Entity("Lmyc.Models.Volunteer", b =>

@@ -9,7 +9,7 @@ namespace Lmyc.Models
     {
 
         [Key]
-        public string BoatId { get; set; }
+        public int BoatId { get; set; }
 
         [MaxLength(150)]
         [DisplayName("Boat Name")]

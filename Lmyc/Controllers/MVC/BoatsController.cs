@@ -28,7 +28,7 @@ namespace Lmyc.Controllers
         }
 
         // GET: Boats/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -83,7 +83,7 @@ namespace Lmyc.Controllers
         }
 
         // GET: Boats/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -103,7 +103,7 @@ namespace Lmyc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("BoatId,BoatName,BoatStatus,BoatPicture,BoatDescription,BoatLength,BoatMake,BoatYear,CreditsPerHourOfUsage")] Boat boat, IFormFile Image)
+        public async Task<IActionResult> Edit(int id, [Bind("BoatId,BoatName,BoatStatus,BoatPicture,BoatDescription,BoatLength,BoatMake,BoatYear,CreditsPerHourOfUsage")] Boat boat, IFormFile Image)
         {
             if (id != boat.BoatId)
             {
@@ -149,7 +149,7 @@ namespace Lmyc.Controllers
         }
 
         // GET: Boats/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -169,7 +169,7 @@ namespace Lmyc.Controllers
         // POST: Boats/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var boat = await _context.Boats.SingleOrDefaultAsync(m => m.BoatId == id);
             _context.Boats.Remove(boat);
@@ -177,7 +177,7 @@ namespace Lmyc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BoatExists(string id)
+        private bool BoatExists(int id)
         {
             return _context.Boats.Any(e => e.BoatId == id);
         }
