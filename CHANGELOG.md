@@ -4,12 +4,17 @@ All notable changes to this project will be documented in this file.
 ##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen (Paul) Li (ML), Nate Chiang (NC)
 
 ## [0.2.3]
+### 2018-04-09
+#### Changed
+* Edited the reservation model as we dont need AllocatedCredits - NC
+* Created view models for Reservations - NC
+
 ### 2018-04-05
 #### Changed
-* Clean up migrations
-* Fix boat model
-* Fix reservation model
-* Fix reservation mvc
+* Clean up migrations - JC
+* Fix boat model - JC
+* Fix reservation model - JC
+* Fix reservation mvc - JC
 
 ## [0.2.3]
 ### 2018-04-02
