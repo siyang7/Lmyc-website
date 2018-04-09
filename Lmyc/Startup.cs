@@ -31,6 +31,8 @@ namespace Lmyc
         {
             services.AddMvc();
 
+            services.AddCors();
+
             // Online test database
             //services.AddDbContext<ApplicationDbContext>(options =>
             //{
@@ -139,6 +141,8 @@ namespace Lmyc
             }
 
             app.UseStaticFiles();
+
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials());
 
             app.UseAuthentication();
 
