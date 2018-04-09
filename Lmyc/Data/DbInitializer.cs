@@ -17,7 +17,7 @@ namespace Lmyc.Data
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
-                string[] roleNames = { "Admin", "Member", "Associate Member", "Booking Moderator" };
+                string[] roleNames = { "Admin", "Member", "Associate Member", "Booking Moderator", "Crew", "Day Skipper", "Cruise Skipper" };
 
                 foreach (var roleName in roleNames)
                 {

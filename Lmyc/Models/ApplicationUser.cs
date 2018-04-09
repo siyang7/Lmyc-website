@@ -118,8 +118,6 @@ namespace Lmyc.Models
          */
         [DisplayName("Member Status")]
         public MemberStatus MemberStatus { get; set; }
-        [DisplayName("Skipper Status")]
-        public SkipperStatus SkipperStatus { get; set; }
     }
 
     public enum MemberStatus
@@ -128,14 +126,5 @@ namespace Lmyc.Models
         Approved,
         [Display(Name = "Pending")]
         Pending
-    }
-
-    public enum SkipperStatus
-    {
-        Crew,
-        [Display(Name = "Day skipper")]
-        DaySkipper,
-        [Display(Name = "Cruise skipper")]
-        CruiseSkipper
     }
 }
