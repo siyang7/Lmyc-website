@@ -17,7 +17,7 @@ namespace Lmyc.Data
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
-                string[] roleNames = { "Admin", "Member", "Associate Member", "Booking Moderator" };
+                string[] roleNames = { "Admin", "Member(A)", "Member(B)", "Associate Member", "Booking Moderator", "Crew", "Day Skipper", "Cruise Skipper" };
 
                 foreach (var roleName in roleNames)
                 {
@@ -39,9 +39,8 @@ namespace Lmyc.Data
                     EmergencyContactOne = "(604) 434-5734",
                     Skills = "none",
                     SailingQualifications = "none",
-                    MemberStatus = MemberStatus.Approved,
                     SailingExperience = 50,
-                    StartingCredit = 1000
+                    StartingCredit = 320
                 };
 
 
@@ -133,7 +132,7 @@ namespace Lmyc.Data
                     BoatLength = 27,
                     BoatMake = "C&C",
                     BoatYear = 1981,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 },
                 new Boat()
                 {
@@ -145,7 +144,7 @@ namespace Lmyc.Data
                     BoatLength = 27,
                     BoatMake = "C&C",
                     BoatYear = 1979,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 },
                 new Boat()
                 {
@@ -159,7 +158,7 @@ namespace Lmyc.Data
                     BoatLength = 27,
                     BoatMake = "C&C Mark 3",
                     BoatYear = 1979,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 },
                 new Boat()
                 {
@@ -172,7 +171,7 @@ namespace Lmyc.Data
                     BoatLength = 25,
                     BoatMake = "'Cal Mark 2'",
                     BoatYear = 1983,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 },
                 new Boat()
                 {
@@ -185,7 +184,7 @@ namespace Lmyc.Data
                     BoatLength = 28,
                     BoatMake = "MkII",
                     BoatYear = 1979,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 },
                 new Boat()
                 {
@@ -199,7 +198,7 @@ namespace Lmyc.Data
                     BoatLength = 27,
                     BoatMake = "C&C Mark 5",
                     BoatYear = 1985,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 },
                 new Boat()
                 {
@@ -216,7 +215,7 @@ namespace Lmyc.Data
                     BoatLength = 30,
                     BoatMake = "Cruiser",
                     BoatYear = 1979,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 }
             };
 
