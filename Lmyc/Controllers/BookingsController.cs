@@ -16,7 +16,7 @@ namespace Lmyc.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-
+        private readonly RoleManager<ApplicationUser> _roleManager;
 
         public BookingsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
@@ -203,7 +203,7 @@ namespace Lmyc.Controllers
                 model.Add(new BookingUserData
                 {
                     UserId = user.Id,
-                    Email = user.Email,
+                    Role = string.Join(", ", _userManager.GetRolesAsync(user).Result),
                     Name = user.FirstName + " " + user.LastName,
                     Assigned = userBookings.Contains(user.Id)
                 });

@@ -17,7 +17,8 @@ namespace Lmyc.Data
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
-                string[] roleNames = { "Admin", "Member(A)", "Member(B)", "Associate Member", "Booking Moderator", "Crew", "Day Skipper", "Cruise Skipper" };
+                string[] roleNames = 
+                    { Role.Admin, Role.MemberGoodStanding, Role.MemberNotGoodStanding, Role.AssociateMember, Role.BookingModerator, Role.Crew, Role.DaySkipper, Role.CruiseSkipper };
 
                 foreach (var roleName in roleNames)
                 {
@@ -45,7 +46,14 @@ namespace Lmyc.Data
 
 
                 var adminId = await EnsureUser(serviceProvider, admin, "P@$$w0rd");
-                await EnsureRole(serviceProvider, adminId, "Admin");
+                await EnsureRole(serviceProvider, adminId, Role.Admin);
+
+                var users = GetApplicationUsers();
+                foreach (var user in users)
+                {
+                    var userId = await EnsureUser(serviceProvider, user, "P@$$w0rd");
+                    await EnsureRole(serviceProvider, userId, Role.MemberGoodStanding);
+                }
 
                 // Look for any boats in the database
                 if (context.Boats.Any())
@@ -86,6 +94,7 @@ namespace Lmyc.Data
                     SailingExperience = newUser.SailingExperience,
                     Skills = newUser.Skills,
                     SailingQualifications = newUser.SailingQualifications,
+                    StartingCredit = newUser.StartingCredit,
                     EmergencyContactOne = newUser.EmergencyContactOne
                 };
 
@@ -115,6 +124,87 @@ namespace Lmyc.Data
             }
 
             return identityResult;
+        }
+
+        private static List<ApplicationUser> GetApplicationUsers()
+        {
+            List<ApplicationUser> users = new List<ApplicationUser>
+            {
+                new ApplicationUser
+                {
+                    UserName = "castiel@bcit.ca",
+                    Email = "castiel@bcit.ca",
+                    FirstName = "Castiel",
+                    LastName = "Li",
+                    Street = "3700 Willingdon Ave",
+                    City = "Burnaby",
+                    Province = "BC",
+                    PostalCode = "V5G 3H2",
+                    Country = "Canada",
+                    HomePhone = "(604) 434-5734",
+                    EmergencyContactOne = "(604) 434-5734",
+                    Skills = "none",
+                    SailingQualifications = "none",
+                    SailingExperience = 2,
+                    StartingCredit = 320
+                },
+                new ApplicationUser
+                {
+                    UserName = "bryan@bcit.ca",
+                    Email = "bryan@bcit.ca",
+                    FirstName = "Bryan",
+                    LastName = "Brotonel",
+                    Street = "3700 Willingdon Ave",
+                    City = "Burnaby",
+                    Province = "BC",
+                    PostalCode = "V5G 3H2",
+                    Country = "Canada",
+                    HomePhone = "(604) 434-5734",
+                    EmergencyContactOne = "(604) 434-5734",
+                    Skills = "none",
+                    SailingQualifications = "none",
+                    SailingExperience = 1,
+                    StartingCredit = 320
+                },
+                new ApplicationUser
+                {
+                    UserName = "nate@bcit.ca",
+                    Email = "nate@bcit.ca",
+                    FirstName = "Nate",
+                    LastName = "Chiang",
+                    Street = "3700 Willingdon Ave",
+                    City = "Burnaby",
+                    Province = "BC",
+                    PostalCode = "V5G 3H2",
+                    Country = "Canada",
+                    HomePhone = "(604) 434-5734",
+                    EmergencyContactOne = "(604) 434-5734",
+                    Skills = "none",
+                    SailingQualifications = "none",
+                    SailingExperience = 5,
+                    StartingCredit = 320
+                },
+                new ApplicationUser
+                {
+                    UserName = "jason@bcit.ca",
+                    Email = "jason@bcit.ca",
+                    FirstName = "Jason",
+                    LastName = "Chen",
+                    Street = "3700 Willingdon Ave",
+                    City = "Burnaby",
+                    Province = "BC",
+                    PostalCode = "V5G 3H2",
+                    Country = "Canada",
+                    HomePhone = "(604) 434-5734",
+                    EmergencyContactOne = "(604) 434-5734",
+                    Skills = "none",
+                    SailingQualifications = "none",
+                    SailingExperience = 3,
+                    StartingCredit = 320
+                }
+            };
+
+            return users;
         }
 
         private static List<Boat> GetBoats()

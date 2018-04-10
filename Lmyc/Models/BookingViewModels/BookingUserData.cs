@@ -9,7 +9,7 @@ namespace Lmyc.Models.BookingViewModels
     public class BookingUserData
     {
         public string UserId { get; set; }
-        public string Email { get; set; }
+        public string Role { get; set; }
         
         [Display(Name = "Name")]
         public string Name { get; set; }
