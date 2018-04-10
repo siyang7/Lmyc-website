@@ -38,15 +38,14 @@ namespace Lmyc.Models
         [Required(ErrorMessage = "Please provide valid members.")]
         public List<ApplicationUser> MemberCrew { get; set; }
 
-        [ForeignKey("User")]
-        [DisplayName("Created By")]
-        public string CreatedBy { get; set; }
+        public string UserId { get; set; }
 
+        [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
 
-        [ForeignKey("Boat")]
         public int BoatId { get; set; }
 
+        [ForeignKey("BoatId")]
         public Boat Boat { get; set; }
     }
 }

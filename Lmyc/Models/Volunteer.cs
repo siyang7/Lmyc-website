@@ -9,10 +9,14 @@ using System.Threading.Tasks;
 namespace Lmyc.Models
 {
     public class Volunteer
-    {   [Key]
+    {
+        [Key]
         public int VoluntterId { get; set; }
-        [ForeignKey("Id")]
-        public virtual ApplicationUser User { get; set; }
+
+        [ForeignKey("UserId")]
+        public ApplicationUser User { get; set; }
+
+        public string UserId { get; set; }
 
         [Required(ErrorMessage = "Date Time is required.")]
         [DataType(DataType.Date)]
@@ -27,23 +31,26 @@ namespace Lmyc.Models
         [Required(ErrorMessage = "Description of the Voluntter work is required")]
         [Range(20, 2048, ErrorMessage = "Description of voluntter work have to be between 20 to 2048 letters")]
         public string Description { get; set; }
+
         [Required(ErrorMessage = "Please select at least one classification code")]
         [DisplayName("Classification Codes")]
         public ClassificationCode ClassificationCodes { get; set; }
     }
+
     public enum ClassificationCode
     {
-        [DisplayName("Boat Maint (Hard)")]
+        [Display(Name = "Boat Maint (Hard)")]
         BoatMaintHard,
-        [DisplayName("Boat Maint (Monthly)")]
+        [Display(Name = "Boat Maint (Monthly)")]
         BoatMaintMonthly,
         Training,
-        [DisplayName("Cruise Skipper (Training)")]
+        [Display(Name = "Cruise Skipper (Training)")]
         CruiseSkipperTraining,
-        [DisplayName("Day Skipper")]
+        [Display(Name = "Day Skipper")]
         DaySkipper,
         Executive,
-        [DisplayName("Winter Watch")]
-        WinterWatch
+        [Display(Name = "Winter Watch")]
+        WinterWatch,
+        Etc
     }
 }
