@@ -9,7 +9,7 @@ using Lmyc.Data;
 using Lmyc.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace Lmyc.Controllers.MVC
+namespace Lmyc.Controllers
 {
     public class ReservationsController : Controller
     {
@@ -73,7 +73,7 @@ namespace Lmyc.Controllers.MVC
                     return BadRequest();
                 }
 
-                reservation.CreatedBy = user.Id;
+                reservation.UserId = user.Id;
                 
 
                 _context.Add(reservation);
@@ -136,7 +136,7 @@ namespace Lmyc.Controllers.MVC
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BoatId"] = new SelectList(_context.Boats, "BoatId", "BoatDescription", reservation.BoatId);
-            ViewData["CreatedBy"] = new SelectList(_context.Users, "Id", "Id", reservation.CreatedBy);
+            ViewData["CreatedBy"] = new SelectList(_context.Users, "Id", "Id", reservation.UserId);
             return View(reservation);
         }
 

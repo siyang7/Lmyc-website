@@ -19,7 +19,7 @@ namespace Lmyc.Controllers
             _context = context;
         }
 
-        // GET: VolunteersMVC
+        // GET: Volunteers/Index
         public async Task<IActionResult> Index()
         {
             return View(await _context.Volunteer.ToListAsync());
