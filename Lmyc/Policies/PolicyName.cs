@@ -9,5 +9,6 @@ namespace Lmyc.Policies
     {
         public const string RequireLogin = "RequireLogin";
         public const string BookingRequirement = "BookingRequirement";
+        public const string RequireAdmin = "RequireAdmin";
     }
 }

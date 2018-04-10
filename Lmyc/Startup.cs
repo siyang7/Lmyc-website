@@ -132,6 +132,7 @@ namespace Lmyc
                 options.AddPolicy(PolicyName.RequireLogin, policy => policy.RequireAuthenticatedUser());
                 options.AddPolicy(PolicyName.BookingRequirement, 
                     policy => policy.RequireRole(Role.Admin, Role.AssociateMember, Role.BookingModerator, Role.Crew, Role.CruiseSkipper, Role.DaySkipper, Role.MemberGoodStanding));
+                options.AddPolicy(PolicyName.RequireAdmin, policy => policy.RequireRole(Role.Admin));
             });
         }
 
