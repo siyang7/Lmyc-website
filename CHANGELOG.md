@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen (Paul) Li (ML), Nate Chiang (NC)
 
+## [0.2.6]
+### 2018-04-10
+#### Added
+* Add associative table UserBooking
+
+#### Changed
+* Fix volunteer model
+* Re-migrate the database
+* Fix booking model
+
 ## [0.2.5]
 ### 2018-04-09
 #### Added
@@ -11,6 +21,8 @@ All notable changes to this project will be documented in this file.
 * Add Admin policy - JC
 * Add member status to role - JC
 * Add skipper status to role - JC
+
+#### Changed
 
 #### Removed
 * Delete Member status - JC
