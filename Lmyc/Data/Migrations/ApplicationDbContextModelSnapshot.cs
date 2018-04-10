@@ -220,7 +220,7 @@ namespace Lmyc.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Volunteer");
+                    b.ToTable("Volunteers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
