@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Lmyc.Models
 {
-    public class Reservation
+    public class Booking
     {
         [Key]
-        public int ReservationId { get; set; }
+        public int BookingId { get; set; }
 
         [Required(ErrorMessage = "Start Date Time is required.")]
         [DataType(DataType.Date)]
@@ -31,13 +31,11 @@ namespace Lmyc.Models
 
         [MaxLength(1024, ErrorMessage = "Itinerary cannot be more than 1024 character")]
         public string Itinerary { get; set; }
+        
+        [Display(Name = "Allocated Hours")]
+        public int AllocatedHours { get; set; }
 
-        public double AllocatedHours { get; set; }
-
-        [DisplayName("Member Crew")]
-        [Required(ErrorMessage = "Please provide valid members.")]
-        public List<ApplicationUser> MemberCrew { get; set; }
-
+        [Display(Name = "Created By")]
         public string UserId { get; set; }
 
         [ForeignKey("UserId")]
@@ -47,5 +45,7 @@ namespace Lmyc.Models
 
         [ForeignKey("BoatId")]
         public Boat Boat { get; set; }
+
+        ICollection<UserBooking> UserBookings { get; set; }
     }
 }

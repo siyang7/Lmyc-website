@@ -12,7 +12,7 @@ using System;
 namespace Lmyc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180410022656_FirstMigrations")]
+    [Migration("20180410032602_FirstMigrations")]
     partial class FirstMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,8 +87,6 @@ namespace Lmyc.Data.Migrations
                     b.Property<string>("Province")
                         .IsRequired();
 
-                    b.Property<int?>("ReservationId");
-
                     b.Property<int>("SailingExperience");
 
                     b.Property<string>("SailingQualifications")
@@ -123,8 +121,6 @@ namespace Lmyc.Data.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("ReservationId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -162,12 +158,12 @@ namespace Lmyc.Data.Migrations
                     b.ToTable("Boats");
                 });
 
-            modelBuilder.Entity("Lmyc.Models.Reservation", b =>
+            modelBuilder.Entity("Lmyc.Models.Booking", b =>
                 {
-                    b.Property<int>("ReservationId")
+                    b.Property<int>("BookingId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("AllocatedHours");
+                    b.Property<int>("AllocatedHours");
 
                     b.Property<int>("BoatId");
 
@@ -183,13 +179,26 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.HasKey("ReservationId");
+                    b.HasKey("BookingId");
 
                     b.HasIndex("BoatId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Booking");
+                });
+
+            modelBuilder.Entity("Lmyc.Models.UserBooking", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<int>("BookingId");
+
+                    b.HasKey("UserId", "BookingId");
+
+                    b.HasIndex("BookingId");
+
+                    b.ToTable("UserBooking");
                 });
 
             modelBuilder.Entity("Lmyc.Models.Volunteer", b =>
@@ -459,14 +468,7 @@ namespace Lmyc.Data.Migrations
                     b.ToTable("OpenIddictTokens");
                 });
 
-            modelBuilder.Entity("Lmyc.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("Lmyc.Models.Reservation")
-                        .WithMany("MemberCrew")
-                        .HasForeignKey("ReservationId");
-                });
-
-            modelBuilder.Entity("Lmyc.Models.Reservation", b =>
+            modelBuilder.Entity("Lmyc.Models.Booking", b =>
                 {
                     b.HasOne("Lmyc.Models.Boat", "Boat")
                         .WithMany()
@@ -476,6 +478,19 @@ namespace Lmyc.Data.Migrations
                     b.HasOne("Lmyc.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Lmyc.Models.UserBooking", b =>
+                {
+                    b.HasOne("Lmyc.Models.Booking", "Booking")
+                        .WithMany()
+                        .HasForeignKey("BookingId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Lmyc.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Lmyc.Models.Volunteer", b =>

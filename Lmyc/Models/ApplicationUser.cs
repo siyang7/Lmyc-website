@@ -112,5 +112,7 @@ namespace Lmyc.Models
         [DisplayName("Credit Balance")]
         [Range(0, 1000)]
         public int CreditBalance { get; set; }
+
+        ICollection<UserBooking> UserBookings { get; set; }
     }
 }
