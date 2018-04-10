@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Lmyc.Models.Reservation>
+﻿@model IEnumerable<Lmyc.Models.Booking>
 
 @{
     ViewData["Title"] = "Index";
@@ -22,13 +22,7 @@
                 @Html.DisplayNameFor(model => model.EndDateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AllocatedCredit)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.AllocatedHours)
-            </th>
-            <th>
-                Name
             </th>
             <th></th>
         </tr>
@@ -47,18 +41,12 @@
                     @Html.DisplayFor(modelItem => item.EndDateTime)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AllocatedCredit)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.AllocatedHours)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ReservationId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ReservationId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ReservationId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.BookingId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.BookingId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.BookingId">Delete</a>
                 </td>
             </tr>
         }

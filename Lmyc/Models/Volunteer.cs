@@ -9,10 +9,14 @@ using System.Threading.Tasks;
 namespace Lmyc.Models
 {
     public class Volunteer
-    {   [Key]
-        public int VoluntterId { get; set; }
-        [ForeignKey("Id")]
-        public virtual ApplicationUser User { get; set; }
+    {
+        [Key]
+        public int VolunteerId { get; set; }
+
+        [ForeignKey("UserId")]
+        public ApplicationUser User { get; set; }
+
+        public string UserId { get; set; }
 
         [Required(ErrorMessage = "Date Time is required.")]
         [DataType(DataType.Date)]
@@ -20,30 +24,33 @@ namespace Lmyc.Models
         public DateTime Date { get; set; }
 
         [Required(ErrorMessage = "Duration in hours is requried")]
-        [Range(1, 100, ErrorMessage = "Duration of voluntter work have to be between 1 to 100 hours")]
+        [Range(1, 24, ErrorMessage = "Duration of voluntter work have to be between 1 to 24 hours")]
         [DisplayName("Number of Hours")]
         public int Duration { get; set; }
 
         [Required(ErrorMessage = "Description of the Voluntter work is required")]
         [Range(20, 2048, ErrorMessage = "Description of voluntter work have to be between 20 to 2048 letters")]
         public string Description { get; set; }
+
         [Required(ErrorMessage = "Please select at least one classification code")]
+        [EnumDataType(typeof(ClassificationCode))]
         [DisplayName("Classification Codes")]
         public ClassificationCode ClassificationCodes { get; set; }
     }
+
     public enum ClassificationCode
     {
-        [DisplayName("Boat Maint (Hard)")]
+        [Display(Name = "Boat Maint (Hard)")]
         BoatMaintHard,
-        [DisplayName("Boat Maint (Monthly)")]
+        [Display(Name = "Boat Maint (Monthly)")]
         BoatMaintMonthly,
-        Training,
-        [DisplayName("Cruise Skipper (Training)")]
+        [Display(Name = "Cruise Skipper (Training)")]
         CruiseSkipperTraining,
-        [DisplayName("Day Skipper")]
+        [Display(Name = "Day Skipper (Training)")]
         DaySkipper,
         Executive,
-        [DisplayName("Winter Watch")]
-        WinterWatch
+        [Display(Name = "Winter Watch")]
+        WinterWatch,
+        Etc
     }
 }
