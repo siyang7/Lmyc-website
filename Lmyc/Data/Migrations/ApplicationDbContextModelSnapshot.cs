@@ -170,8 +170,6 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<int>("BoatId");
 
-                    b.Property<string>("CreatedBy");
-
                     b.Property<DateTime>("EndDateTime");
 
                     b.Property<string>("Itinerary")
@@ -182,11 +180,13 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<DateTime>("StartDateTime");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("ReservationId");
 
                     b.HasIndex("BoatId");
 
-                    b.HasIndex("CreatedBy");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reservations");
                 });
@@ -205,11 +205,11 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<int>("Duration");
 
-                    b.Property<string>("Id");
+                    b.Property<string>("UserId");
 
                     b.HasKey("VoluntterId");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Volunteer");
                 });
@@ -474,14 +474,14 @@ namespace Lmyc.Data.Migrations
 
                     b.HasOne("Lmyc.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Lmyc.Models.Volunteer", b =>
                 {
                     b.HasOne("Lmyc.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("Id");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

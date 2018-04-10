@@ -12,8 +12,8 @@ using System;
 namespace Lmyc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180405225430_First_Migration")]
-    partial class First_Migration
+    [Migration("20180410022656_FirstMigrations")]
+    partial class FirstMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,8 +67,6 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<int>("MemberStatus");
-
                     b.Property<string>("MobilePhone");
 
                     b.Property<string>("NormalizedEmail")
@@ -100,8 +98,6 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<string>("Skills")
                         .IsRequired();
-
-                    b.Property<int>("SkipperStatus");
 
                     b.Property<int>("StartingCredit");
 
@@ -171,13 +167,9 @@ namespace Lmyc.Data.Migrations
                     b.Property<int>("ReservationId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("AllocatedCredit");
-
                     b.Property<double>("AllocatedHours");
 
                     b.Property<int>("BoatId");
-
-                    b.Property<string>("CreatedBy");
 
                     b.Property<DateTime>("EndDateTime");
 
@@ -189,11 +181,13 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<DateTime>("StartDateTime");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("ReservationId");
 
                     b.HasIndex("BoatId");
 
-                    b.HasIndex("CreatedBy");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reservations");
                 });
@@ -212,11 +206,11 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<int>("Duration");
 
-                    b.Property<string>("Id");
+                    b.Property<string>("UserId");
 
                     b.HasKey("VoluntterId");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Volunteer");
                 });
@@ -481,14 +475,14 @@ namespace Lmyc.Data.Migrations
 
                     b.HasOne("Lmyc.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Lmyc.Models.Volunteer", b =>
                 {
                     b.HasOne("Lmyc.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("Id");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

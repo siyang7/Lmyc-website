@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Lmyc.Data.Migrations
 {
-    public partial class First_Migration : Migration
+    public partial class FirstMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,12 +72,6 @@ namespace Lmyc.Data.Migrations
                 nullable: false,
                 defaultValue: "");
 
-            migrationBuilder.AddColumn<int>(
-                name: "MemberStatus",
-                table: "AspNetUsers",
-                nullable: false,
-                defaultValue: 0);
-
             migrationBuilder.AddColumn<string>(
                 name: "MobilePhone",
                 table: "AspNetUsers",
@@ -117,12 +111,6 @@ namespace Lmyc.Data.Migrations
                 table: "AspNetUsers",
                 nullable: false,
                 defaultValue: "");
-
-            migrationBuilder.AddColumn<int>(
-                name: "SkipperStatus",
-                table: "AspNetUsers",
-                nullable: false,
-                defaultValue: 0);
 
             migrationBuilder.AddColumn<int>(
                 name: "StartingCredit",
@@ -216,14 +204,14 @@ namespace Lmyc.Data.Migrations
                     Date = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     Duration = table.Column<int>(nullable: false),
-                    Id = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Volunteer", x => x.VoluntterId);
                     table.ForeignKey(
-                        name: "FK_Volunteer_AspNetUsers_Id",
-                        column: x => x.Id,
+                        name: "FK_Volunteer_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -235,14 +223,13 @@ namespace Lmyc.Data.Migrations
                 {
                     ReservationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AllocatedCredit = table.Column<double>(nullable: false),
                     AllocatedHours = table.Column<double>(nullable: false),
                     BoatId = table.Column<int>(nullable: false),
-                    CreatedBy = table.Column<string>(nullable: true),
                     EndDateTime = table.Column<DateTime>(nullable: false),
                     Itinerary = table.Column<string>(maxLength: 1024, nullable: true),
                     NonMemberCrew = table.Column<string>(nullable: false),
-                    StartDateTime = table.Column<DateTime>(nullable: false)
+                    StartDateTime = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -254,8 +241,8 @@ namespace Lmyc.Data.Migrations
                         principalColumn: "BoatId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Reservations_AspNetUsers_CreatedBy",
-                        column: x => x.CreatedBy,
+                        name: "FK_Reservations_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -378,14 +365,14 @@ namespace Lmyc.Data.Migrations
                 column: "BoatId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservations_CreatedBy",
+                name: "IX_Reservations_UserId",
                 table: "Reservations",
-                column: "CreatedBy");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Volunteer_Id",
+                name: "IX_Volunteer_UserId",
                 table: "Volunteer",
-                column: "Id");
+                column: "UserId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUsers_Reservations_ReservationId",
@@ -480,10 +467,6 @@ namespace Lmyc.Data.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "MemberStatus",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
                 name: "MobilePhone",
                 table: "AspNetUsers");
 
@@ -509,10 +492,6 @@ namespace Lmyc.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "Skills",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "SkipperStatus",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
