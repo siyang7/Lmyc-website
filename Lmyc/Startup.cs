@@ -142,6 +142,8 @@ namespace Lmyc
 
             app.UseAuthentication();
 
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
