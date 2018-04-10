@@ -114,7 +114,7 @@ namespace Lmyc.Models
         public int CreditBalance { get; set; }
 
         /**
-         * Member and Skipper Status.
+         * Member Status.
          */
         [DisplayName("Member Status")]
         public MemberStatus MemberStatus { get; set; }

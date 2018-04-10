@@ -14,6 +14,8 @@ using Lmyc.Services;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using AspNet.Security.OpenIdConnect.Primitives;
+using Lmyc.Policies.Requirements;
+using Lmyc.Policies;
 
 namespace Lmyc
 {
@@ -123,6 +125,13 @@ namespace Lmyc
                 var basePath = AppContext.BaseDirectory;
                 var xmlPath = Path.Combine(basePath, "LmycApi.xml");
                 c.IncludeXmlComments(xmlPath);
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(PolicyName.RequireLogin, policy => policy.RequireAuthenticatedUser());
+                options.AddPolicy(PolicyName.BookingRequirement, 
+                    policy => policy.RequireRole(Role.Admin, Role.AssociateMember, Role.BookingModerator, Role.Crew, Role.CruiseSkipper, Role.DaySkipper, Role.MemberGoodStanding));
             });
         }
 

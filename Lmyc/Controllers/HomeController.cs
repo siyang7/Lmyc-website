@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Lmyc.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lmyc.Controllers
 {
