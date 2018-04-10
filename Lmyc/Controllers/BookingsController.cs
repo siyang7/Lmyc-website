@@ -7,22 +7,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Lmyc.Data;
 using Lmyc.Models;
+using Lmyc.Models.BookingViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace Lmyc.Controllers
 {
     public class BookingsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public BookingsController(ApplicationDbContext context)
+
+        public BookingsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Bookings
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Booking.Include(b => b.Boat).Include(b => b.User);
+            var applicationDbContext = _context.Bookings.Include(b => b.Boat).Include(b => b.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -34,10 +39,11 @@ namespace Lmyc.Controllers
                 return NotFound();
             }
 
-            var booking = await _context.Booking
+            var booking = await _context.Bookings
                 .Include(b => b.Boat)
                 .Include(b => b.User)
                 .SingleOrDefaultAsync(m => m.BookingId == id);
+
             if (booking == null)
             {
                 return NotFound();
@@ -49,8 +55,12 @@ namespace Lmyc.Controllers
         // GET: Bookings/Create
         public IActionResult Create()
         {
-            ViewData["BoatId"] = new SelectList(_context.Boats, "BoatId", "BoatDescription");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            var booking = new Booking
+            {
+                UserBookings = new List<UserBooking>()
+            };
+            PopulateBookingUserData(booking);
+            ViewData["Boats"] = new SelectList(_context.Boats, "BoatId", "BoatName");
             return View();
         }
 
@@ -59,16 +69,35 @@ namespace Lmyc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookingId,StartDateTime,EndDateTime,NonMemberCrew,Itinerary,AllocatedHours,UserId,BoatId")] Booking booking)
+        public async Task<IActionResult> Create([Bind("BoatId,StartDateTime,EndDateTime,AllocatedHours,NonMemberCrews,Itinerary")]Booking booking, string[] memberCrews)
         {
+            if (memberCrews != null)
+            {
+                booking.UserBookings = new List<UserBooking>();
+            }
+            
+            foreach (var user in memberCrews)
+            {
+                var BookingToAdd = new UserBooking
+                {
+                    BookingId = booking.BookingId,
+                    UserId = user
+                };
+
+                booking.UserBookings.Add(BookingToAdd);
+            }
+
             if (ModelState.IsValid)
             {
+                var user = await _userManager.GetUserAsync(User);
+                booking.UserId = user.Id;
                 _context.Add(booking);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BoatId"] = new SelectList(_context.Boats, "BoatId", "BoatDescription", booking.BoatId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", booking.UserId);
+
+            PopulateBookingUserData(booking);
+            ViewData["Boats"] = new SelectList(_context.Boats, "BoatId", "BoatName", booking.BoatId);
             return View(booking);
         }
 
@@ -80,7 +109,7 @@ namespace Lmyc.Controllers
                 return NotFound();
             }
 
-            var booking = await _context.Booking.SingleOrDefaultAsync(m => m.BookingId == id);
+            var booking = await _context.Bookings.SingleOrDefaultAsync(m => m.BookingId == id);
             if (booking == null)
             {
                 return NotFound();
@@ -135,7 +164,7 @@ namespace Lmyc.Controllers
                 return NotFound();
             }
 
-            var booking = await _context.Booking
+            var booking = await _context.Bookings
                 .Include(b => b.Boat)
                 .Include(b => b.User)
                 .SingleOrDefaultAsync(m => m.BookingId == id);
@@ -152,15 +181,35 @@ namespace Lmyc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var booking = await _context.Booking.SingleOrDefaultAsync(m => m.BookingId == id);
-            _context.Booking.Remove(booking);
+            var booking = await _context.Bookings.SingleOrDefaultAsync(m => m.BookingId == id);
+            _context.Bookings.Remove(booking);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool BookingExists(int id)
         {
-            return _context.Booking.Any(e => e.BookingId == id);
+            return _context.Bookings.Any(e => e.BookingId == id);
+        }
+
+        private void PopulateBookingUserData(Booking booking)
+        {
+            var users = _context.Users;
+            var userBookings = new HashSet<string>(booking.UserBookings.Select(u => u.UserId));
+            var model = new List<BookingUserData>();
+            
+            foreach (var user in users)
+            {
+                model.Add(new BookingUserData
+                {
+                    UserId = user.Id,
+                    Email = user.Email,
+                    Name = user.FirstName + " " + user.LastName,
+                    Assigned = userBookings.Contains(user.Id)
+                });
+            }
+
+            ViewData["Users"] = model;
         }
     }
 }

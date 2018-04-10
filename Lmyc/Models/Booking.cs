@@ -25,9 +25,9 @@ namespace Lmyc.Models
         [DisplayName("To Date")]
         public DateTime EndDateTime { get; set; }
 
-        [DisplayName("Non-Member Crew")]
+        [DisplayName("Non-Member Crews")]
         [Required(ErrorMessage = "Please provide valid members.")]
-        public string NonMemberCrew { get; set; }
+        public string NonMemberCrews { get; set; }
 
         [MaxLength(1024, ErrorMessage = "Itinerary cannot be more than 1024 character")]
         public string Itinerary { get; set; }
@@ -46,6 +46,6 @@ namespace Lmyc.Models
         [ForeignKey("BoatId")]
         public Boat Boat { get; set; }
 
-        ICollection<UserBooking> UserBookings { get; set; }
+        public ICollection<UserBooking> UserBookings { get; set; }
     }
 }

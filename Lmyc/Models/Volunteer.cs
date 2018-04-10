@@ -11,7 +11,7 @@ namespace Lmyc.Models
     public class Volunteer
     {
         [Key]
-        public int VoluntterId { get; set; }
+        public int VolunteerId { get; set; }
 
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
@@ -24,7 +24,7 @@ namespace Lmyc.Models
         public DateTime Date { get; set; }
 
         [Required(ErrorMessage = "Duration in hours is requried")]
-        [Range(1, 100, ErrorMessage = "Duration of voluntter work have to be between 1 to 100 hours")]
+        [Range(1, 24, ErrorMessage = "Duration of voluntter work have to be between 1 to 24 hours")]
         [DisplayName("Number of Hours")]
         public int Duration { get; set; }
 
@@ -33,6 +33,7 @@ namespace Lmyc.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Please select at least one classification code")]
+        [EnumDataType(typeof(ClassificationCode))]
         [DisplayName("Classification Codes")]
         public ClassificationCode ClassificationCodes { get; set; }
     }
@@ -43,10 +44,9 @@ namespace Lmyc.Models
         BoatMaintHard,
         [Display(Name = "Boat Maint (Monthly)")]
         BoatMaintMonthly,
-        Training,
         [Display(Name = "Cruise Skipper (Training)")]
         CruiseSkipperTraining,
-        [Display(Name = "Day Skipper")]
+        [Display(Name = "Day Skipper (Training)")]
         DaySkipper,
         Executive,
         [Display(Name = "Winter Watch")]

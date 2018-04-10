@@ -193,7 +193,7 @@ namespace Lmyc.Data.Migrations
                 name: "Volunteer",
                 columns: table => new
                 {
-                    VoluntterId = table.Column<int>(nullable: false)
+                    VolunteerId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ClassificationCodes = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
@@ -203,7 +203,7 @@ namespace Lmyc.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Volunteer", x => x.VoluntterId);
+                    table.PrimaryKey("PK_Volunteer", x => x.VolunteerId);
                     table.ForeignKey(
                         name: "FK_Volunteer_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -213,7 +213,7 @@ namespace Lmyc.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Booking",
+                name: "Bookings",
                 columns: table => new
                 {
                     BookingId = table.Column<int>(nullable: false)
@@ -222,21 +222,21 @@ namespace Lmyc.Data.Migrations
                     BoatId = table.Column<int>(nullable: false),
                     EndDateTime = table.Column<DateTime>(nullable: false),
                     Itinerary = table.Column<string>(maxLength: 1024, nullable: true),
-                    NonMemberCrew = table.Column<string>(nullable: false),
+                    NonMemberCrews = table.Column<string>(nullable: false),
                     StartDateTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Booking", x => x.BookingId);
+                    table.PrimaryKey("PK_Bookings", x => x.BookingId);
                     table.ForeignKey(
-                        name: "FK_Booking_Boats_BoatId",
+                        name: "FK_Bookings_Boats_BoatId",
                         column: x => x.BoatId,
                         principalTable: "Boats",
                         principalColumn: "BoatId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Booking_AspNetUsers_UserId",
+                        name: "FK_Bookings_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -278,9 +278,9 @@ namespace Lmyc.Data.Migrations
                 {
                     table.PrimaryKey("PK_UserBooking", x => new { x.UserId, x.BookingId });
                     table.ForeignKey(
-                        name: "FK_UserBooking_Booking_BookingId",
+                        name: "FK_UserBooking_Bookings_BookingId",
                         column: x => x.BookingId,
-                        principalTable: "Booking",
+                        principalTable: "Bookings",
                         principalColumn: "BookingId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -340,13 +340,13 @@ namespace Lmyc.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_BoatId",
-                table: "Booking",
+                name: "IX_Bookings_BoatId",
+                table: "Bookings",
                 column: "BoatId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_UserId",
-                table: "Booking",
+                name: "IX_Bookings_UserId",
+                table: "Bookings",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -424,7 +424,7 @@ namespace Lmyc.Data.Migrations
                 name: "OpenIddictAuthorizations");
 
             migrationBuilder.DropTable(
-                name: "Booking");
+                name: "Bookings");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictApplications");

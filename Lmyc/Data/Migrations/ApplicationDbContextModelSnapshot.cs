@@ -171,7 +171,7 @@ namespace Lmyc.Data.Migrations
                     b.Property<string>("Itinerary")
                         .HasMaxLength(1024);
 
-                    b.Property<string>("NonMemberCrew")
+                    b.Property<string>("NonMemberCrews")
                         .IsRequired();
 
                     b.Property<DateTime>("StartDateTime");
@@ -184,7 +184,7 @@ namespace Lmyc.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Booking");
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("Lmyc.Models.UserBooking", b =>
@@ -202,7 +202,7 @@ namespace Lmyc.Data.Migrations
 
             modelBuilder.Entity("Lmyc.Models.Volunteer", b =>
                 {
-                    b.Property<int>("VoluntterId")
+                    b.Property<int>("VolunteerId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("ClassificationCodes");
@@ -216,7 +216,7 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.HasKey("VoluntterId");
+                    b.HasKey("VolunteerId");
 
                     b.HasIndex("UserId");
 
@@ -482,7 +482,7 @@ namespace Lmyc.Data.Migrations
             modelBuilder.Entity("Lmyc.Models.UserBooking", b =>
                 {
                     b.HasOne("Lmyc.Models.Booking", "Booking")
-                        .WithMany()
+                        .WithMany("UserBookings")
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade);
 
