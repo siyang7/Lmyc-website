@@ -3,7 +3,20 @@ All notable changes to this project will be documented in this file.
 
 ##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen (Paul) Li (ML), Nate Chiang (NC)
 
-## [0.2.3]
+## [0.2.5]
+### 2018-04-09
+#### Added
+* Add booking policy
+* Add login policy
+* Add Admin policy
+* Add member status to role
+* Add skipper status to role
+
+#### Removed
+* Delete Member status
+* Delete Skipper status
+
+## [0.2.4]
 ### 2018-04-09
 #### Changed
 * Edited the reservation model as we dont need AllocatedCredits - NC
