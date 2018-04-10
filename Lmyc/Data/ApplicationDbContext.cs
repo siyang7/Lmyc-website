@@ -18,13 +18,17 @@ namespace Lmyc.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<UserBooking>()
+                .HasKey(u => new { u.UserId, u.BookingId });
+
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
         public DbSet<Boat> Boats { get; set; }
-        public DbSet<Reservation> Reservations { get; set; }
-        public DbSet<Volunteer> Volunteer { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Volunteer> Volunteers { get; set; }
     }
 }

@@ -113,29 +113,6 @@ namespace Lmyc.Models
         [Range(0, 1000)]
         public int CreditBalance { get; set; }
 
-        /**
-         * Member and Skipper Status.
-         */
-        [DisplayName("Member Status")]
-        public MemberStatus MemberStatus { get; set; }
-        [DisplayName("Skipper Status")]
-        public SkipperStatus SkipperStatus { get; set; }
-    }
-
-    public enum MemberStatus
-    {
-        [Display(Name = "Approved")]
-        Approved,
-        [Display(Name = "Pending")]
-        Pending
-    }
-
-    public enum SkipperStatus
-    {
-        Crew,
-        [Display(Name = "Day skipper")]
-        DaySkipper,
-        [Display(Name = "Cruise skipper")]
-        CruiseSkipper
+        ICollection<UserBooking> UserBookings { get; set; }
     }
 }

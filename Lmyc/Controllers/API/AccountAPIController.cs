@@ -61,8 +61,7 @@ namespace Lmyc.Controllers.API
                 Skills = model.Skills,
                 SailingQualifications = model.SailingQualifications,
                 EmergencyContactOne = model.EmergencyContactOne,
-                StartingCredit = 1000,
-                MemberStatus = MemberStatus.Pending
+                StartingCredit = 320
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);

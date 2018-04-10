@@ -17,7 +17,8 @@ namespace Lmyc.Data
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
-                string[] roleNames = { "Admin", "Member", "Associate Member", "Booking Moderator" };
+                string[] roleNames = 
+                    { Role.Admin, Role.MemberGoodStanding, Role.MemberNotGoodStanding, Role.AssociateMember, Role.BookingModerator, Role.Crew, Role.DaySkipper, Role.CruiseSkipper };
 
                 foreach (var roleName in roleNames)
                 {
@@ -39,14 +40,20 @@ namespace Lmyc.Data
                     EmergencyContactOne = "(604) 434-5734",
                     Skills = "none",
                     SailingQualifications = "none",
-                    MemberStatus = MemberStatus.Approved,
                     SailingExperience = 50,
-                    StartingCredit = 1000
+                    StartingCredit = 320
                 };
 
 
                 var adminId = await EnsureUser(serviceProvider, admin, "P@$$w0rd");
-                await EnsureRole(serviceProvider, adminId, "Admin");
+                await EnsureRole(serviceProvider, adminId, Role.Admin);
+
+                var users = GetApplicationUsers();
+                foreach (var user in users)
+                {
+                    var userId = await EnsureUser(serviceProvider, user, "P@$$w0rd");
+                    await EnsureRole(serviceProvider, userId, Role.MemberGoodStanding);
+                }
 
                 // Look for any boats in the database
                 if (context.Boats.Any())
@@ -87,6 +94,7 @@ namespace Lmyc.Data
                     SailingExperience = newUser.SailingExperience,
                     Skills = newUser.Skills,
                     SailingQualifications = newUser.SailingQualifications,
+                    StartingCredit = newUser.StartingCredit,
                     EmergencyContactOne = newUser.EmergencyContactOne
                 };
 
@@ -118,6 +126,87 @@ namespace Lmyc.Data
             return identityResult;
         }
 
+        private static List<ApplicationUser> GetApplicationUsers()
+        {
+            List<ApplicationUser> users = new List<ApplicationUser>
+            {
+                new ApplicationUser
+                {
+                    UserName = "castiel@bcit.ca",
+                    Email = "castiel@bcit.ca",
+                    FirstName = "Castiel",
+                    LastName = "Li",
+                    Street = "3700 Willingdon Ave",
+                    City = "Burnaby",
+                    Province = "BC",
+                    PostalCode = "V5G 3H2",
+                    Country = "Canada",
+                    HomePhone = "(604) 434-5734",
+                    EmergencyContactOne = "(604) 434-5734",
+                    Skills = "none",
+                    SailingQualifications = "none",
+                    SailingExperience = 2,
+                    StartingCredit = 320
+                },
+                new ApplicationUser
+                {
+                    UserName = "bryan@bcit.ca",
+                    Email = "bryan@bcit.ca",
+                    FirstName = "Bryan",
+                    LastName = "Brotonel",
+                    Street = "3700 Willingdon Ave",
+                    City = "Burnaby",
+                    Province = "BC",
+                    PostalCode = "V5G 3H2",
+                    Country = "Canada",
+                    HomePhone = "(604) 434-5734",
+                    EmergencyContactOne = "(604) 434-5734",
+                    Skills = "none",
+                    SailingQualifications = "none",
+                    SailingExperience = 1,
+                    StartingCredit = 320
+                },
+                new ApplicationUser
+                {
+                    UserName = "nate@bcit.ca",
+                    Email = "nate@bcit.ca",
+                    FirstName = "Nate",
+                    LastName = "Chiang",
+                    Street = "3700 Willingdon Ave",
+                    City = "Burnaby",
+                    Province = "BC",
+                    PostalCode = "V5G 3H2",
+                    Country = "Canada",
+                    HomePhone = "(604) 434-5734",
+                    EmergencyContactOne = "(604) 434-5734",
+                    Skills = "none",
+                    SailingQualifications = "none",
+                    SailingExperience = 5,
+                    StartingCredit = 320
+                },
+                new ApplicationUser
+                {
+                    UserName = "jason@bcit.ca",
+                    Email = "jason@bcit.ca",
+                    FirstName = "Jason",
+                    LastName = "Chen",
+                    Street = "3700 Willingdon Ave",
+                    City = "Burnaby",
+                    Province = "BC",
+                    PostalCode = "V5G 3H2",
+                    Country = "Canada",
+                    HomePhone = "(604) 434-5734",
+                    EmergencyContactOne = "(604) 434-5734",
+                    Skills = "none",
+                    SailingQualifications = "none",
+                    SailingExperience = 3,
+                    StartingCredit = 320
+                }
+            };
+
+            return users;
+        }
+
         private static List<Boat> GetBoats()
         {
             List<Boat> boats = new List<Boat>()
@@ -133,7 +222,7 @@ namespace Lmyc.Data
                     BoatLength = 27,
                     BoatMake = "C&C",
                     BoatYear = 1981,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 },
                 new Boat()
                 {
@@ -145,7 +234,7 @@ namespace Lmyc.Data
                     BoatLength = 27,
                     BoatMake = "C&C",
                     BoatYear = 1979,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 },
                 new Boat()
                 {
@@ -159,7 +248,7 @@ namespace Lmyc.Data
                     BoatLength = 27,
                     BoatMake = "C&C Mark 3",
                     BoatYear = 1979,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 },
                 new Boat()
                 {
@@ -172,7 +261,7 @@ namespace Lmyc.Data
                     BoatLength = 25,
                     BoatMake = "'Cal Mark 2'",
                     BoatYear = 1983,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 },
                 new Boat()
                 {
@@ -185,7 +274,7 @@ namespace Lmyc.Data
                     BoatLength = 28,
                     BoatMake = "MkII",
                     BoatYear = 1979,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 },
                 new Boat()
                 {
@@ -199,7 +288,7 @@ namespace Lmyc.Data
                     BoatLength = 27,
                     BoatMake = "C&C Mark 5",
                     BoatYear = 1985,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 },
                 new Boat()
                 {
@@ -216,7 +305,7 @@ namespace Lmyc.Data
                     BoatLength = 30,
                     BoatMake = "Cruiser",
                     BoatYear = 1979,
-                    CreditsPerHourOfUsage = 100
+                    CreditsPerHourOfUsage = 6
                 }
             };
 

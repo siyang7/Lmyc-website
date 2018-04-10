@@ -14,6 +14,7 @@ using Lmyc.Services;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using AspNet.Security.OpenIdConnect.Primitives;
+using Lmyc.Policies;
 
 namespace Lmyc
 {
@@ -31,6 +32,8 @@ namespace Lmyc
         {
             services.AddMvc();
 
+            services.AddCors();
+
             // Online test database
             //services.AddDbContext<ApplicationDbContext>(options =>
             //{
@@ -45,7 +48,7 @@ namespace Lmyc
             // Local Database
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Lmyc"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
 
                 // Register the entity sets needed by OpenIddict.
                 // Note: use the generic overload if you need
@@ -122,6 +125,14 @@ namespace Lmyc
                 var xmlPath = Path.Combine(basePath, "LmycApi.xml");
                 c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(PolicyName.RequireLogin, policy => policy.RequireAuthenticatedUser());
+                options.AddPolicy(PolicyName.BookingRequirement, 
+                    policy => policy.RequireRole(Role.Admin, Role.AssociateMember, Role.BookingModerator, Role.Crew, Role.CruiseSkipper, Role.DaySkipper, Role.MemberGoodStanding));
+                options.AddPolicy(PolicyName.RequireAdmin, policy => policy.RequireRole(Role.Admin));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -139,6 +150,8 @@ namespace Lmyc
             }
 
             app.UseStaticFiles();
+
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials());
 
             app.UseAuthentication();
 
