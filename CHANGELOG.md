@@ -6,15 +6,15 @@ All notable changes to this project will be documented in this file.
 ## [0.2.5]
 ### 2018-04-09
 #### Added
-* Add booking policy
-* Add login policy
-* Add Admin policy
-* Add member status to role
-* Add skipper status to role
+* Add booking policy - JC
+* Add login policy - JC
+* Add Admin policy - JC
+* Add member status to role - JC
+* Add skipper status to role - JC
 
 #### Removed
-* Delete Member status
-* Delete Skipper status
+* Delete Member status - JC
+* Delete Skipper status - JC
 
 ## [0.2.4]
 ### 2018-04-09
