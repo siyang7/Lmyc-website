@@ -66,8 +66,6 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<int>("MemberStatus");
-
                     b.Property<string>("MobilePhone");
 
                     b.Property<string>("NormalizedEmail")

@@ -14,7 +14,6 @@ using Lmyc.Services;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using AspNet.Security.OpenIdConnect.Primitives;
-using Lmyc.Policies.Requirements;
 using Lmyc.Policies;
 
 namespace Lmyc

@@ -112,19 +112,5 @@ namespace Lmyc.Models
         [DisplayName("Credit Balance")]
         [Range(0, 1000)]
         public int CreditBalance { get; set; }
-
-        /**
-         * Member Status.
-         */
-        [DisplayName("Member Status")]
-        public MemberStatus MemberStatus { get; set; }
-    }
-
-    public enum MemberStatus
-    {
-        [Display(Name = "Approved")]
-        Approved,
-        [Display(Name = "Pending")]
-        Pending
     }
 }

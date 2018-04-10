@@ -39,7 +39,6 @@ namespace Lmyc.Data
                     EmergencyContactOne = "(604) 434-5734",
                     Skills = "none",
                     SailingQualifications = "none",
-                    MemberStatus = MemberStatus.Approved,
                     SailingExperience = 50,
                     StartingCredit = 320
                 };

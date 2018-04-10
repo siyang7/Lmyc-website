@@ -12,8 +12,8 @@ using System;
 namespace Lmyc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180409221009_FixUserStatus")]
-    partial class FixUserStatus
+    [Migration("20180410014839_DeleteUserStatus")]
+    partial class DeleteUserStatus
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,8 +66,6 @@ namespace Lmyc.Data.Migrations
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<int>("MemberStatus");
 
                     b.Property<string>("MobilePhone");
 
