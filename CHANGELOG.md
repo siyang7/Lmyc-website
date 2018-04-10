@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 #### Removed
 * Delete Member status - JC
 * Delete Skipper status - JC
+* Remove old migrations - JC
 
 ## [0.2.4]
 ### 2018-04-09
