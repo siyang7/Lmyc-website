@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### 2018-04-11
 #### Added
 * Add GET method that returns the user from a given username - NC
+* Add method to calculate Allocated hours - NC
 
 ### Changed
 * Route for volunteer api to /VolunteersAPI - NC
