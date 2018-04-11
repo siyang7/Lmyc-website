@@ -90,7 +90,7 @@ namespace Lmyc.Controllers.API
 
             if (user == null)
             {
-                return BadRequest("Fuck this shit");
+                return BadRequest("User Not Found");
             }
 
             return Ok(user);

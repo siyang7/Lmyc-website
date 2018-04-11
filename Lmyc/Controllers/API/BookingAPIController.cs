@@ -75,6 +75,39 @@ namespace Lmyc.Controllers.API
             }
             return bookingModels;
         }
+
+        // POST: api/bookingsapi
+        [HttpPost]
+        public async Task<IActionResult> PostBooking([FromBody] Booking booking, string[] memberCrews)
+        {
+            if (memberCrews == null)
+            {
+                return BadRequest("No member crew is selected");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            booking.UserBookings = new List<UserBooking>();
+
+            foreach (var member in memberCrews)
+            {
+                var BookingToAdd = new UserBooking
+                {
+                    BookingId = booking.BookingId,
+                    UserId = member
+                };
+
+                booking.UserBookings.Add(BookingToAdd);
+            }
+
+            _context.Bookings.Add(booking);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetBooking", new { id = booking.BookingId }, booking);
+        }
     }
 
 }
