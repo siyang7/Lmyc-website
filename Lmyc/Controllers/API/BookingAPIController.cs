@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Lmyc.Controllers.API
 {
     [Produces("application/json")]
-    [Route("api/BookingAPI")]
+    [Route("api/Bookingsapi")]
     public class BookingAPIController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -70,6 +70,8 @@ namespace Lmyc.Controllers.API
                     LastName = b.User.LastName,
                     MemberCrews = userRoles
                 };
+
+                bookingModels.Add(booking);
             }
             return bookingModels;
         }
