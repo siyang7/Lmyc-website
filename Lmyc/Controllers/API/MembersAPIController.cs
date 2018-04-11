@@ -47,23 +47,24 @@ namespace Lmyc.Controllers.API
             return models;
         }
 
-        // GET: api/MembersAPI/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetMember([FromRoute] string id)
+        // Get: api/MembersApi/{username}
+        [HttpGet]
+        [Route("{username}")]
+        public async Task<IActionResult> GetUser(string username)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var applicationUser = await _userManager.Users.SingleOrDefaultAsync(m => m.Id == id);
+            var user = await _userManager.FindByNameAsync(username);
 
-            if (applicationUser == null)
+            if (user == null)
             {
-                return NotFound();
+                return BadRequest("User Not Found");
             }
 
-            return Ok(applicationUser);
+            return Ok(user);
         }
     }
 }
