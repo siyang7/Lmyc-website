@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 #### Added
 * Add associative table UserBooking - JC
 * Add more users - JC
+* Add Booking API - JC
 
 #### Changed
 * Fix volunteer model - JC
