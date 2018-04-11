@@ -6,8 +6,10 @@ All notable changes to this project will be documented in this file.
 ## [0.2.6]
 ### 2018-04-10
 #### Added
+* Add volunteer Controller and API - NC
 * Add associative table UserBooking - JC
 * Add more users - JC
+* Add Booking API - JC
 
 #### Changed
 * Fix volunteer model - JC
