@@ -48,20 +48,20 @@
                     </thead>
                     <tbody>
                         @foreach (var user in users)
-            {
-                <tr>
-                    <td>
-                        <input type="checkbox" name="memberCrews" value="@user.UserId" checked="@user.Assigned" />
-                    </td>
-                    <td>
-                        @user.Name
-                    </td>
-                    <td>
-                        @user.Role
-                    </td>
-                </tr>
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="memberCrews" value="@user.UserId" checked="@user.Assigned" />
+                                </td>
+                                <td>
+                                    @user.Name
+                                </td>
+                                <td>
+                                    @user.Role
+                                </td>
+                            </tr>
 
-}
+                        }
                     </tbody>
                 </table>
             </div>

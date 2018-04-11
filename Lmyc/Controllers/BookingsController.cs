@@ -67,8 +67,18 @@ namespace Lmyc.Controllers
 
             var model = new BookingViewModel
             {
-                Booking = booking,
-                UserRoles = userRoles
+                BookingId = booking.BookingId,
+                BoatId = booking.BoatId,
+                BoatName = booking.Boat.BoatName,
+                StartDateTime = booking.StartDateTime,
+                EndDateTime = booking.EndDateTime,
+                NonMemberCrews = booking.NonMemberCrews,
+                Itinerary = booking.Itinerary,
+                AllocatedHours = booking.AllocatedHours,
+                UserId = booking.UserId,
+                FirstName = booking.User.FirstName,
+                LastName = booking.User.LastName,
+                MemberCrews = userRoles
             };
 
             return View(model);
