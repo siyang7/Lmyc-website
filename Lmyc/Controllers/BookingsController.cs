@@ -9,6 +9,7 @@ using Lmyc.Data;
 using Lmyc.Models;
 using Lmyc.Models.BookingViewModels;
 using Microsoft.AspNetCore.Identity;
+using Lmyc.Models.UserViewModels;
 
 namespace Lmyc.Controllers
 {
@@ -16,7 +17,6 @@ namespace Lmyc.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<ApplicationUser> _roleManager;
 
         public BookingsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
@@ -42,6 +42,9 @@ namespace Lmyc.Controllers
             var booking = await _context.Bookings
                 .Include(b => b.Boat)
                 .Include(b => b.User)
+                .Include(b => b.UserBookings)
+                    .ThenInclude(b => b.User)
+                .OrderBy(b => b.StartDateTime)
                 .SingleOrDefaultAsync(m => m.BookingId == id);
 
             if (booking == null)
@@ -49,7 +52,36 @@ namespace Lmyc.Controllers
                 return NotFound();
             }
 
-            return View(booking);
+            var userRoles = new List<UserRoleData>();
+
+            foreach (var b in booking.UserBookings)
+            {
+                var userRole = new UserRoleData
+                {
+                    Name = b.User.FirstName + " " + b.User.LastName,
+                    RoleName = string.Join(", ", _userManager.GetRolesAsync(b.User).Result)
+                };
+
+                userRoles.Add(userRole);
+            }
+
+            var model = new BookingViewModel
+            {
+                BookingId = booking.BookingId,
+                BoatId = booking.BoatId,
+                BoatName = booking.Boat.BoatName,
+                StartDateTime = booking.StartDateTime,
+                EndDateTime = booking.EndDateTime,
+                NonMemberCrews = booking.NonMemberCrews,
+                Itinerary = booking.Itinerary,
+                AllocatedHours = booking.AllocatedHours,
+                UserId = booking.UserId,
+                FirstName = booking.User.FirstName,
+                LastName = booking.User.LastName,
+                MemberCrews = userRoles
+            };
+
+            return View(model);
         }
 
         // GET: Bookings/Create
@@ -114,8 +146,8 @@ namespace Lmyc.Controllers
             {
                 return NotFound();
             }
-            ViewData["BoatId"] = new SelectList(_context.Boats, "BoatId", "BoatDescription", booking.BoatId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", booking.UserId);
+
+            ViewData["BoatId"] = new SelectList(_context.Boats, "BoatId", "BoatName", booking.BoatId);
             return View(booking);
         }
 
@@ -151,8 +183,7 @@ namespace Lmyc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BoatId"] = new SelectList(_context.Boats, "BoatId", "BoatDescription", booking.BoatId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", booking.UserId);
+            ViewData["BoatId"] = new SelectList(_context.Boats, "BoatId", "BoatName", booking.BoatId);
             return View(booking);
         }
 

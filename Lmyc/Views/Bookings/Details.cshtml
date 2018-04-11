@@ -1,4 +1,4 @@
-﻿@model Lmyc.Models.Booking
+﻿@model Lmyc.Models.BookingViewModels.BookingViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -10,6 +10,12 @@
     <h4>Booking</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BoatName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BoatName)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.StartDateTime)
         </dt>
@@ -41,29 +47,24 @@
             @Html.DisplayFor(model => model.AllocatedHours)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Boat)
+            Name
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Boat.BoatName)
+            @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.User)
+            Member Crews:
         </dt>
+        @foreach (var u in Model.MemberCrews)
+    {
         <dd>
-            @Html.DisplayFor(model => model.User.UserName)
-        </dd>
-        <dt>
-            MemberCrews:
-        </dt>
-        <dd>
-            asddas
+            Name: @u.Name
         </dd>
         <dd>
-            asddas
+            Role: @u.RoleName
         </dd>
-        <dd>
-            asddas
-        </dd>
+        <hr />
+}
     </dl>
 </div>
 <div>
