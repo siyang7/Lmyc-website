@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using AspNet.Security.OpenIdConnect.Primitives;
 using Lmyc.Models;
 using Lmyc.Models.AccountViewModels;
 using Lmyc.Services;
@@ -73,6 +75,25 @@ namespace Lmyc.Controllers.API
             }
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("GetUser/{username}")]
+        public async Task<IActionResult> GetUser(string username)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                return BadRequest("Fuck this shit");
+            }
+
+            return Ok(user);
         }
     }
 }

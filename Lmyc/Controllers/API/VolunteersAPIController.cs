@@ -11,7 +11,7 @@ using Lmyc.Models;
 namespace Lmyc.Controllers.API
 {
     [Produces("application/json")]
-    [Route("api/Volunteers")]
+    [Route("api/VolunteersAPI")]
     public class VolunteersAPIController : Controller
     {
         private readonly ApplicationDbContext _context;

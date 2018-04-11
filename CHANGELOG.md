@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ##Team member: Castiel Li (CL) , Jason Chen (JC) , Harrison Milbradt (HM) , Mu Chen (Paul) Li (ML), Nate Chiang (NC)
 
+## [0.2.7]
+### 2018-04-11
+#### Added
+* Add GET method that returns the user from a given username - NC
+
+### Changed
+* Route for volunteer api to /VolunteersAPI - NC
+
 ## [0.2.6]
 ### 2018-04-10
 #### Added
