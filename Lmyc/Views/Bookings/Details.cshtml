@@ -11,51 +11,51 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Booking.Boat)
+            @Html.DisplayNameFor(model => model.BoatName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Booking.Boat.BoatName)
+            @Html.DisplayFor(model => model.BoatName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Booking.StartDateTime)
+            @Html.DisplayNameFor(model => model.StartDateTime)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Booking.StartDateTime)
+            @Html.DisplayFor(model => model.StartDateTime)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Booking.EndDateTime)
+            @Html.DisplayNameFor(model => model.EndDateTime)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Booking.EndDateTime)
+            @Html.DisplayFor(model => model.EndDateTime)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Booking.NonMemberCrews)
+            @Html.DisplayNameFor(model => model.NonMemberCrews)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Booking.NonMemberCrews)
+            @Html.DisplayFor(model => model.NonMemberCrews)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Booking.Itinerary)
+            @Html.DisplayNameFor(model => model.Itinerary)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Booking.Itinerary)
+            @Html.DisplayFor(model => model.Itinerary)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Booking.AllocatedHours)
+            @Html.DisplayNameFor(model => model.AllocatedHours)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Booking.AllocatedHours)
+            @Html.DisplayFor(model => model.AllocatedHours)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Booking.User)
+            Name
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Booking.User.FirstName) @Html.DisplayFor(model => model.Booking.User.LastName)
+            @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
         </dd>
         <dt>
             Member Crews:
         </dt>
-        @foreach (var u in Model.UserRoles)
+        @foreach (var u in Model.MemberCrews)
     {
         <dd>
             Name: @u.Name
@@ -68,6 +68,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Booking.BookingId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.BookingId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

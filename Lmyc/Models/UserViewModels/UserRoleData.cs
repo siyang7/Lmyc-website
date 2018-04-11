@@ -8,8 +8,7 @@ namespace Lmyc.Models.UserViewModels
     public class UserRoleData
     {
         public string Name { get; set; }
-
-        public string RoleId { get; set; }
+        
         public string RoleName { get; set; }
     }
 }
