@@ -31,7 +31,7 @@ namespace Lmyc.Models
         public string Itinerary { get; set; }
         
         [Display(Name = "Allocated Hours")]
-        public int AllocatedHours { get; set; }
+        public int AllocatedHours { get; private set; }
 
         [Display(Name = "Created By")]
         public string UserId { get; set; }
@@ -48,24 +48,33 @@ namespace Lmyc.Models
 
         public void CalculateHours()
         {
-            int totalCredit = 0;
-            DateTime start = new DateTime(2018, 3, 10, 10, 0, 0);
-            DateTime end = new DateTime(2018, 3, 13, 6, 0, 0);
-            var hourDiff = end.Subtract(start).Hours;
-            if (hourDiff >= 10)
+            if (StartDateTime > EndDateTime)
             {
-                totalCredit += 10;
+                AllocatedHours = 0;
+                return;
             }
-            var dayDiff = end.Subtract(start).Days;
-            for (int i = 0; i < dayDiff - 1; i++)
+            int totalCredit = 0;
+            DateTime tomorrow = StartDateTime;
+            var day = StartDateTime;
+            int max = 10;
+            int totalDays = StartDateTime.Date.Subtract(EndDateTime.Date).Duration().Days + 1;
+            for (int i = 0; i < totalDays; i++)
             {
-                if (start.DayOfWeek.Equals(DayOfWeek.Saturday) || start.DayOfWeek.Equals(DayOfWeek.Sunday))
+                max = (day.DayOfWeek.Equals(DayOfWeek.Saturday) || day.DayOfWeek.Equals(DayOfWeek.Sunday)) ? 15 : 10;
+                if (i == totalDays - 1)
                 {
-                    
+                    var hourDiff = EndDateTime.Subtract(tomorrow).Hours;
+                    totalCredit += (hourDiff >= max || hourDiff == 0) ? max : hourDiff;
+                }
+                else
+                {
+                    tomorrow = day.AddDays(1).AddHours(-day.Hour);
+                    var hourDiff = (tomorrow.Subtract(day)).Hours;
+                    day = tomorrow;
+                    totalCredit += (hourDiff >= max || hourDiff == 0) ? max : hourDiff;
                 }
             }
-            //var dayDiff = EndDateTime.Subtract(StartDateTime).Days;
-            //var startDay = StartDateTime.Day;
+            AllocatedHours = totalCredit;
         }
     }
 }
