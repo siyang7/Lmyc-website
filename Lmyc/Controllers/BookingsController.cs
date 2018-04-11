@@ -91,7 +91,7 @@ namespace Lmyc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BoatId,StartDateTime,EndDateTime,NonMemberCrews,Itinerary")]Booking booking, string[] memberCrews)
+        public async Task<IActionResult> Create([Bind("BoatId,StartDateTime,EndDateTime,AllocatedHours,NonMemberCrews,Itinerary")]Booking booking, string[] memberCrews)
         {
             if (memberCrews != null)
             {
@@ -111,10 +111,10 @@ namespace Lmyc.Controllers
 
             if (ModelState.IsValid)
             {
-                //var user = await _userManager.GetUserAsync(User);
-                //booking.UserId = user.Id;
-                //_context.Add(booking);
-                //await _context.SaveChangesAsync();
+                var user = await _userManager.GetUserAsync(User);
+                booking.UserId = user.Id;
+                _context.Add(booking);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 

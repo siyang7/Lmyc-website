@@ -31,7 +31,7 @@ namespace Lmyc.Models
         public string Itinerary { get; set; }
         
         [Display(Name = "Allocated Hours")]
-        public int AllocatedHours { get; private set; }
+        public int AllocatedHours { get; set; }
 
         [Display(Name = "Created By")]
         public string UserId { get; set; }
