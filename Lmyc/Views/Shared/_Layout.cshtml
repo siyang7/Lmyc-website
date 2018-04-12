@@ -10,13 +10,17 @@
         <link rel="stylesheet" href="~/css/site.css" />
         @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/main.css" />*@
         <link rel="stylesheet" href="~/css/main.css" />
+        @*checkbox*@
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+<environment exclude="Development">
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</environment>
 </head>
 <body>
     <!-- Header -->
@@ -43,10 +47,10 @@
     </header>
 
     <!-- Banner -->
-    <section id="banner">
+    @*<section id="banner">
         <h1>Welcome to LMYC</h1>
         <p>Lower Mainland Yacht Co-Op</p>
-    </section>
+    </section>*@
 
     <!-- One -->
 
@@ -62,7 +66,7 @@
             </div>
         </div>
     </section>
-   
+
 
     <!-- Footer -->
     <footer id="footer">
@@ -80,10 +84,11 @@
         <script src="~/js/skel.min.js"></script>
         <script src="~/js/util.js"></script>
         <script src="~/js/main.js"></script>
-  
+
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+      
 
     </environment>
     <environment exclude="Development">
@@ -93,6 +98,7 @@
                 crossorigin="anonymous"
                 integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
         </script>
+
         <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
