@@ -55,7 +55,7 @@ namespace Lmyc.Controllers.API
         // Get: api/MembersApi/{username}
         [HttpGet]
         [Route("{username}")]
-        [Authorize(Policy = "RequireLogin", AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
+        //[Authorize(Policy = "RequireLogin", AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetUser(string username)
         {
             if (!ModelState.IsValid)

@@ -14,7 +14,7 @@ namespace Lmyc.Controllers.API
 {
     [Produces("application/json")]
     [Route("api/VolunteersAPI")]
-    [Authorize(Policy = "RequireLogin", AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
+    //[Authorize(Policy = "RequireLogin", AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
     public class VolunteersAPIController : Controller
     {
         private readonly ApplicationDbContext _context;

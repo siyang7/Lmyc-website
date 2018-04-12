@@ -104,33 +104,33 @@ namespace Lmyc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BoatId,StartDateTime,EndDateTime,AllocatedHours,NonMemberCrews,Itinerary")]Booking booking, string[] memberCrews)
         {
-            if (memberCrews != null)
-            {
-                booking.UserBookings = new List<UserBooking>();
-            }
+            //if (memberCrews != null)
+            //{
+            //    booking.UserBookings = new List<UserBooking>();
+            //}
             
-            foreach (var user in memberCrews)
-            {
-                var BookingToAdd = new UserBooking
-                {
-                    BookingId = booking.BookingId,
-                    UserId = user
-                };
+            //foreach (var user in memberCrews)
+            //{
+            //    var BookingToAdd = new UserBooking
+            //    {
+            //        BookingId = booking.BookingId,
+            //        UserId = user
+            //    };
 
-                booking.UserBookings.Add(BookingToAdd);
-            }
+            //    booking.UserBookings.Add(BookingToAdd);
+            //}
 
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.GetUserAsync(User);
-                booking.UserId = user.Id;
-                _context.Add(booking);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    var user = await _userManager.GetUserAsync(User);
+            //    booking.UserId = user.Id;
+            //    _context.Add(booking);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
 
-            PopulateBookingUserData(booking);
-            ViewData["Boats"] = new SelectList(_context.Boats, "BoatId", "BoatName", booking.BoatId);
+            //PopulateBookingUserData(booking);
+            //ViewData["Boats"] = new SelectList(_context.Boats, "BoatId", "BoatName", booking.BoatId);
             return View(booking);
         }
 
