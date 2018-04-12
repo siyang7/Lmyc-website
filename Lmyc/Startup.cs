@@ -40,21 +40,13 @@ namespace Lmyc
 
             services.AddCors();
 
-            // Online test database
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //{
-            //    options.UseSqlServer(Configuration.GetConnectionString("DevelopmentConnection"));
-
-            //    // Register the entity sets needed by OpenIddict.
-            //    // Note: use the generic overload if you need
-            //    // to replace the default OpenIddict entities.
-            //    options.UseOpenIddict();
-            //});
-
             // Local Database
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                // local db
+                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                // online db
+                options.UseSqlServer(Configuration.GetConnectionString("DevelopmentConnection"));
 
                 // Register the entity sets needed by OpenIddict.
                 // Note: use the generic overload if you need
