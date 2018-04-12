@@ -21,6 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Path)
             </th>
+            <th>
+                Download
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -34,6 +37,9 @@
             </td>
             <td>
                 <a asp-action="Details" asp-route-path="@item.Path">View</a>
+            </td>
+            <td>
+                <a asp-action="Download" asp-route-filename="@item.DocumentName">Download</a>
             </td>
             <td>
                 <a asp-action="Delete" asp-route-id="@item.DocumentId">Delete</a>

@@ -10,9 +10,11 @@ using Lmyc.Models;
 using Lmyc.Models.BookingViewModels;
 using Microsoft.AspNetCore.Identity;
 using Lmyc.Models.UserViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lmyc.Controllers
 {
+    [Authorize(Policy="RequireLogin")]
     public class BookingsController : Controller
     {
         private readonly ApplicationDbContext _context;

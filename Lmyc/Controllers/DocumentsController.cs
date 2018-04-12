@@ -10,9 +10,11 @@ using Lmyc.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lmyc.Controllers
 {
+    [Authorize (Policy = "RequireAdmin")]
     public class DocumentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -32,11 +34,25 @@ namespace Lmyc.Controllers
         }
 
         // GET: Documents/Details/5
-        //public FileResult Details(string path)
-        //{
-        //    return new FileStreamResult(@path, "application/pdf");
+        public ActionResult Details(string path)
+        {
+            string contentType = GetContentType(path);
+            if (contentType.Equals("abort"))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            FileStream stream;
+            try
+            {
+                stream = new FileStream(@path, FileMode.Open);
+            }
+            catch(Exception e)
+            {
+                return RedirectToAction(nameof(Index));
+            }
 
-        //}
+            return new FileStreamResult(stream, contentType);
+        }
 
         // GET: Documents/Create
         public async Task<IActionResult> Create()
@@ -66,7 +82,7 @@ namespace Lmyc.Controllers
                     await file.CopyToAsync(stream);
                 }
                 document.DocumentName = file.FileName.Trim();
-                document.Path = path;
+                document.Path = "wwwroot/documents/"+file.FileName;
                 _context.Add(document);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -100,6 +116,13 @@ namespace Lmyc.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var document = await _context.Document.SingleOrDefaultAsync(m => m.DocumentId == id);
+
+            FileInfo file = new FileInfo(document.Path);
+            if(file.Exists)
+            {
+                file.Delete();
+            }
+            
             _context.Document.Remove(document);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -110,7 +133,6 @@ namespace Lmyc.Controllers
             return _context.Document.Any(e => e.DocumentId == id);
         }
 
-        [HttpPost]
         public async Task<IActionResult> Download(string filename)
         {
             if (filename == null)
@@ -118,7 +140,7 @@ namespace Lmyc.Controllers
 
             var path = Path.Combine(
                            Directory.GetCurrentDirectory(),
-                           "wwwroot", filename);
+                           "wwwroot/documents", filename);
 
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open))
@@ -133,6 +155,10 @@ namespace Lmyc.Controllers
         {
             var types = GetMimeTypes();
             var ext = Path.GetExtension(path).ToLowerInvariant();
+            if(!types.ContainsKey(ext))
+            {
+                return "abort";
+            }
             return types[ext];
         }
 
@@ -142,10 +168,6 @@ namespace Lmyc.Controllers
             {
                 {".txt", "text/plain"},
                 {".pdf", "application/pdf"},
-                {".doc", "application/vnd.ms-word"},
-                {".docx", "application/vnd.ms-word"},
-                {".xls", "application/vnd.ms-excel"},
-                {".xlsx", "application/vnd.openxmlformatsofficedocument.spreadsheetml.sheet"},
                 {".png", "image/png"},
                 {".jpg", "image/jpeg"},
                 {".jpeg", "image/jpeg"},
