@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Lmyc.Data;
+using Lmyc.Helper;
 using Lmyc.Models;
 using Lmyc.Models.BookingViewModels;
 using Lmyc.Models.UserViewModels;
@@ -34,7 +35,7 @@ namespace Lmyc.Controllers.API
         {
             DateTime startDate = Convert.ToDateTime(start);
             DateTime endDate = Convert.ToDateTime(end);
-            return CalculateHours(startDate, endDate);
+            return AllocatedHoursCalculator.CalculateAllocatedHours(startDate, endDate);
         }
 
         // GET: api/bookingApi
@@ -101,7 +102,9 @@ namespace Lmyc.Controllers.API
             {
                 return BadRequest(errors);
             }
-            
+
+            var allocatedHours = AllocatedHoursCalculator.CalculateAllocatedHours(bookingModel.StartDateTime, bookingModel.EndDateTime);
+
             var booking = new Booking
             {
                 BoatId = bookingModel.BoatId,
@@ -109,7 +112,7 @@ namespace Lmyc.Controllers.API
                 EndDateTime = bookingModel.EndDateTime,
                 NonMemberCrews = bookingModel.NonMemberCrews,
                 Itinerary = bookingModel.NonMemberCrews,
-                AllocatedHours = bookingModel.AllocatedHours,
+                AllocatedHours = allocatedHours,
                 UserId = bookingModel.UserId
             };
             
@@ -217,9 +220,7 @@ namespace Lmyc.Controllers.API
                     return "Requires Day Skippers";
                 }
             }
-
             
-
             var boat = await _context.Boats.SingleOrDefaultAsync(b => b.BoatId == bookingModel.BoatId);
 
             if (boat == null)
@@ -227,9 +228,7 @@ namespace Lmyc.Controllers.API
                 return "Boat Not Found";
             }
 
-            bookingModel.CalculateHours();
-
-            var allocatedHours = bookingModel.AllocatedHours;
+            var allocatedHours = AllocatedHoursCalculator.CalculateAllocatedHours(bookingModel.StartDateTime, bookingModel.EndDateTime);
 
             if (totalCredit != allocatedHours * boat.CreditsPerHourOfUsage)
             {
@@ -237,43 +236,6 @@ namespace Lmyc.Controllers.API
             }
 
             return string.Empty;
-        }
-
-        private int CalculateHours(DateTime startDateTime, DateTime endDateTime)
-        {
-            if (startDateTime > endDateTime)
-            {
-                return 0;
-            }
-
-            if (startDateTime >= DateTime.Now && startDateTime < DateTime.Now.AddDays(1))
-            {
-                return 0;
-            }
-
-            int allocatedHours = 0;
-            DateTime tomorrow = startDateTime;
-            var day = startDateTime;
-            int max = 10;
-            int totalDays = startDateTime.Date.Subtract(endDateTime.Date).Duration().Days + 1;
-            for (int i = 0; i < totalDays; i++)
-            {
-                max = (day.DayOfWeek.Equals(DayOfWeek.Saturday) || day.DayOfWeek.Equals(DayOfWeek.Sunday)) ? 15 : 10;
-                if (i == totalDays - 1)
-                {
-                    var hourDiff = endDateTime.Subtract(tomorrow).Hours;
-                    allocatedHours += (hourDiff >= max || hourDiff == 0) ? max : hourDiff;
-                }
-                else
-                {
-                    tomorrow = day.AddDays(1).AddHours(-day.Hour);
-                    var hourDiff = (tomorrow.Subtract(day)).Hours;
-                    day = tomorrow;
-                    allocatedHours += (hourDiff >= max || hourDiff == 0) ? max : hourDiff;
-                }
-            }
-
-            return allocatedHours;
         }
     }
 
