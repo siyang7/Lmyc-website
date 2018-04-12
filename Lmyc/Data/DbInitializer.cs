@@ -323,18 +323,23 @@ namespace Lmyc.Data
             return boats;
         }
 
-        //private static List<Booking> GetBookings(ApplicationDbContext context)
-        //{
-        //    List<Booking> bookings = new List<Booking>
-        //    {
-        //        new Booking
-        //        {
-        //            StartDateTime = DateTime.Now.AddDays(7),
-        //            StartDateTime = DateTime.Now.AddDays(8),
-        //            Boat = context.Boats.FirstOrDefault(b => b.BoatId == 1)
-                    
-        //        }
-        //    };
-        //}
+        private static List<Booking> GetBookings(ApplicationDbContext context)
+        {
+            List<Booking> bookings = new List<Booking>
+            {
+                new Booking
+                {
+                    StartDateTime = DateTime.Now.AddDays(7),
+                    EndDateTime = DateTime.Now.AddDays(8),
+                    NonMemberCrews = "Medhat",
+                    Itinerary = "Find titanic",
+
+                    Boat = context.Boats.FirstOrDefault(b => b.BoatId == 1)
+
+                }
+            };
+
+            return bookings;
+        }
     }
 }

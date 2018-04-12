@@ -44,9 +44,9 @@ namespace Lmyc
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 // local db
-                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 // online db
-                options.UseSqlServer(Configuration.GetConnectionString("DevelopmentConnection"));
+                //options.UseSqlServer(Configuration.GetConnectionString("DevelopmentConnection"));
 
                 // Register the entity sets needed by OpenIddict.
                 // Note: use the generic overload if you need
