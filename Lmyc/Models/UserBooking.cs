@@ -15,5 +15,7 @@ namespace Lmyc.Models
         public int BookingId { get; set; }
         [ForeignKey("BookingId")]
         public Booking Booking { get; set; }
+
+        public int UsedCredit { get; set; }
     }
 }
