@@ -11,8 +11,8 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-controller="Documents" asp-action="Create" method="post" enctype="multipart/form-data">
-            <input type="hidden" value="@ViewBag.UserId" asp-for="UserId" />
-            <input type="file" name="file" />
+            <input type="hidden" value="@ViewBag.UserId" asp-for="UserId"/>
+            <input type="file" name="file" accept=".txt,.pdf,.csv"/>
             <button type="submit">Upload File</button>
         </form>
     </div>
