@@ -15,6 +15,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using AspNet.Security.OpenIdConnect.Primitives;
 using Lmyc.Policies;
+using Microsoft.Extensions.FileProviders;
 
 namespace Lmyc
 {
@@ -30,6 +31,11 @@ namespace Lmyc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/documents")));
+
             services.AddMvc();
 
             services.AddCors();
