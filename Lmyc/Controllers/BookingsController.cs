@@ -242,7 +242,7 @@ namespace Lmyc.Controllers
                 });
             }
 
-            ViewData["Users"] = model;
+            ViewData["Members"] = model;
         }
     }
 }

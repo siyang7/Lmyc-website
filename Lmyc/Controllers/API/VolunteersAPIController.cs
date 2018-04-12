@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Lmyc.Data;
 using Lmyc.Models;
+using AspNet.Security.OAuth.Validation;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lmyc.Controllers.API
 {
     [Produces("application/json")]
     [Route("api/VolunteersAPI")]
+    [Authorize(Policy = "RequireLogin", AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
     public class VolunteersAPIController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -9,6 +9,8 @@ using Lmyc.Data;
 using Lmyc.Models;
 using Lmyc.Models.UserViewModels;
 using Microsoft.AspNetCore.Identity;
+using AspNet.Security.OAuth.Validation;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lmyc.Controllers.API
 {
@@ -53,6 +55,7 @@ namespace Lmyc.Controllers.API
         // Get: api/MembersApi/{username}
         [HttpGet]
         [Route("{username}")]
+        [Authorize(Policy = "RequireLogin", AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetUser(string username)
         {
             if (!ModelState.IsValid)
