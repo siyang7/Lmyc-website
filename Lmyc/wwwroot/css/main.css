@@ -2808,6 +2808,11 @@ input[type=checkbox] {
 			font-size: 3em;
 		}
 
+        #logout {
+            background: #337ab7;
+            border-radius: 5px;
+        }
+
 		#header a {
 			-moz-transition: color 0.2s ease-in-out;
 			-webkit-transition: color 0.2s ease-in-out;
@@ -2821,7 +2826,7 @@ input[type=checkbox] {
 		}
 
 			#header a:hover {
-				color: #ffffff;
+				color: #1b50a5;
 			}
 
 			#header a:last-child {
