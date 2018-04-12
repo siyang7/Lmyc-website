@@ -145,8 +145,36 @@ namespace Lmyc.Controllers.API
         }
 
         // DELETE: api/bookingsapi
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBooking([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        
+            var booking = await _context.Bookings
+                .Include(b => b.UserBookings)
+                    .ThenInclude(b => b.User)
+                .SingleOrDefaultAsync(b => b.BookingId == id);
+
+            if (booking == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var b in booking.UserBookings)
+            {
+                // return the credit
+                b.User.CreditBalance += b.UsedCredit;
+            }
+
+            _context.Bookings.Remove(booking);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+
+        }
 
         private async Task<string> BookingRules(BookingViewModel bookingModel)
         {
