@@ -144,6 +144,10 @@ namespace Lmyc.Controllers.API
             return Ok(bookingModel);
         }
 
+        // DELETE: api/bookingsapi
+
+        
+
         private async Task<string> BookingRules(BookingViewModel bookingModel)
         {
             // crew requirements
