@@ -76,24 +76,5 @@ namespace Lmyc.Controllers.API
 
             return Ok();
         }
-
-        [HttpGet]
-        [Route("GetUser/{username}")]
-        public async Task<IActionResult> GetUser(string username)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var user = await _userManager.FindByNameAsync(username);
-
-            if (user == null)
-            {
-                return BadRequest("User Not Found");
-            }
-
-            return Ok(user);
-        }
     }
 }

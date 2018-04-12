@@ -6,11 +6,15 @@ All notable changes to this project will be documented in this file.
 ## [0.2.7]
 ### 2018-04-11
 #### Added
+* Add policies on controllers that needed them such as Booking, Volunteer and Document - NC
+* Add Document Controller that adds, delete and view the file in the server - NC
+* Add Document Model that represents files that are uploaded to the server - NC
 * Add GET method that returns the user from a given username - NC
 * Add method to calculate Allocated hours - NC
 * Add GET method that get all members - JC
 
 ### Changed
+* Changed the links to hide if not logged in - NC
 * Route for volunteer api to /VolunteersAPI - NC
 
 ## [0.2.6]

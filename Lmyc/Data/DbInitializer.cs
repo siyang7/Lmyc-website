@@ -1,4 +1,5 @@
-﻿using Lmyc.Models;
+﻿using Lmyc.Helper;
+using Lmyc.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebSockets.Internal;
 using Microsoft.EntityFrameworkCore;
@@ -73,7 +74,21 @@ namespace Lmyc.Data
                     context.Boats.Add(b);
                 }
 
+                if (context.Bookings.Any())
+                {
+                    return; // DB have been seeded
+                }
+
                 context.SaveChanges();
+
+                //var bookings = GetBookings(context);
+
+                //foreach (Booking b in bookings)
+                //{
+                //    context.Bookings.Add(b);
+                //}
+
+                //context.SaveChanges();
             }
                 
         }
@@ -322,5 +337,35 @@ namespace Lmyc.Data
 
             return boats;
         }
+
+        //private static List<Booking> GetBookings(ApplicationDbContext context)
+        //{
+        //    List<Booking> bookings = new List<Booking>();
+        //    var booking1 = new Booking
+        //    {
+        //        StartDateTime = DateTime.Now.AddDays(7),
+        //        EndDateTime = DateTime.Now.AddDays(9),
+        //        NonMemberCrews = "Medhat",
+        //        Itinerary = "Find titanic",
+        //        UserId = context.Users.FirstOrDefault(u => u.UserName == "castiel").Id,
+        //        BoatId = context.Boats.FirstOrDefault(b => b.BoatId == 1).BoatId
+        //    };
+
+        //    booking1.AllocatedHours = AllocatedHoursCalculator.CalculateAllocatedHours(booking1.StartDateTime, booking1.EndDateTime);
+        //    var userBookings = new List<UserBooking>
+        //    {
+        //        new UserBooking
+        //        {
+        //            UserId = context.Users.FirstOrDefault(u => u.UserName == "jason").Id,
+        //            BookingId = context.Bookings.FirstOrDefault(b => b.BookingId == 1).BookingId
+        //        }
+        //    };
+
+        //    booking1.UserBookings = userBookings;
+
+        //    bookings.Add(booking1);
+
+        //    return bookings;
+        //}
     }
 }
