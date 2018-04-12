@@ -27,6 +27,16 @@ namespace Lmyc.Controllers.API
             _userManager = userManager;
         }
 
+        // api/bookingapi/GetAllocatedHours
+        [HttpPost]
+        [Route("GetAllocatedHours")]
+        public int GetAllocatedHours(string start, string end)
+        {
+            DateTime startDate = Convert.ToDateTime(start);
+            DateTime endDate = Convert.ToDateTime(end);
+            return CalculateHours(startDate, endDate);
+        }
+
         // GET: api/bookingApi
         [HttpGet]
         public IEnumerable<BookingViewModel> GetBooking()
@@ -48,7 +58,8 @@ namespace Lmyc.Controllers.API
                 {
                     var userRole = new UserRoleData
                     {
-                        Name = br.User.FirstName + " " + br.User.LastName,
+                        FisrtName = br.User.FirstName,
+                        LastName = br.User.LastName,
                         RoleName = string.Join(", ", _userManager.GetRolesAsync(b.User).Result)
                     };
 
@@ -137,6 +148,16 @@ namespace Lmyc.Controllers.API
             bool cruiseSkipper = false;
             int totalCredit = 0;
 
+            var bookings = _context.Bookings.Where(b => b.BoatId == bookingModel.BoatId);
+            
+            foreach (var b in bookings)
+            {
+                if (bookingModel.StartDateTime < b.EndDateTime && b.StartDateTime < bookingModel.EndDateTime)
+                {
+                    return "Overlap booking with " + bookingModel.BoatName;
+                }
+            }
+
             var user = await _userManager.FindByIdAsync(bookingModel.UserId);
 
             if (user == null)
@@ -172,28 +193,32 @@ namespace Lmyc.Controllers.API
 
                 totalCredit += m.UsedCredit;
 
-                if (await _userManager.IsInRoleAsync(member, Role.DaySkipper))
-                {
-                    daySkipper = true;
-                    continue;
-                }
-
-                if (await _userManager.IsInRoleAsync(member, Role.CruiseSkipper))
+                if (_userManager.IsInRoleAsync(member, Role.CruiseSkipper).Result)
                 {
                     cruiseSkipper = true;
-                    break;
+                }
+
+                if (_userManager.IsInRoleAsync(member, Role.DaySkipper).Result)
+                {
+                    daySkipper = true;
                 }
             }
 
-            if (bookingModel.EndDateTime.Subtract(bookingModel.StartDateTime).Duration().TotalDays >= 1 && !cruiseSkipper)
+            var days = bookingModel.EndDateTime.Subtract(bookingModel.StartDateTime).Duration().TotalDays;
+
+            if ( days >= 1 && !cruiseSkipper)
             {
                 return "Requires Cruise Skipper";
             }
-
-            if (bookingModel.EndDateTime.Subtract(bookingModel.StartDateTime).Duration().TotalDays < 1 && !daySkipper)
+            else
             {
-                return "Requires Day Skippers";
+                if (days < 1 && !(daySkipper || cruiseSkipper))
+                {
+                    return "Requires Day Skippers";
+                }
             }
+
+            
 
             var boat = await _context.Boats.SingleOrDefaultAsync(b => b.BoatId == bookingModel.BoatId);
 
@@ -204,12 +229,51 @@ namespace Lmyc.Controllers.API
 
             bookingModel.CalculateHours();
 
-            if (totalCredit != bookingModel.AllocatedHours * boat.CreditsPerHourOfUsage)
+            var allocatedHours = bookingModel.AllocatedHours;
+
+            if (totalCredit != allocatedHours * boat.CreditsPerHourOfUsage)
             {
-                return "Total Credit doesnt match";
+                return "Total Credit doesnt match " + allocatedHours;
             }
 
             return string.Empty;
+        }
+
+        private int CalculateHours(DateTime startDateTime, DateTime endDateTime)
+        {
+            if (startDateTime > endDateTime)
+            {
+                return 0;
+            }
+
+            if (startDateTime >= DateTime.Now && startDateTime < DateTime.Now.AddDays(1))
+            {
+                return 0;
+            }
+
+            int allocatedHours = 0;
+            DateTime tomorrow = startDateTime;
+            var day = startDateTime;
+            int max = 10;
+            int totalDays = startDateTime.Date.Subtract(endDateTime.Date).Duration().Days + 1;
+            for (int i = 0; i < totalDays; i++)
+            {
+                max = (day.DayOfWeek.Equals(DayOfWeek.Saturday) || day.DayOfWeek.Equals(DayOfWeek.Sunday)) ? 15 : 10;
+                if (i == totalDays - 1)
+                {
+                    var hourDiff = endDateTime.Subtract(tomorrow).Hours;
+                    allocatedHours += (hourDiff >= max || hourDiff == 0) ? max : hourDiff;
+                }
+                else
+                {
+                    tomorrow = day.AddDays(1).AddHours(-day.Hour);
+                    var hourDiff = (tomorrow.Subtract(day)).Hours;
+                    day = tomorrow;
+                    allocatedHours += (hourDiff >= max || hourDiff == 0) ? max : hourDiff;
+                }
+            }
+
+            return allocatedHours;
         }
     }
 

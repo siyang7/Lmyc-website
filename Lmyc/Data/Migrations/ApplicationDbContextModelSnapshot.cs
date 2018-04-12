@@ -211,6 +211,8 @@ namespace Lmyc.Data.Migrations
 
                     b.Property<int>("BookingId");
 
+                    b.Property<int>("UsedCredit");
+
                     b.HasKey("UserId", "BookingId");
 
                     b.HasIndex("BookingId");

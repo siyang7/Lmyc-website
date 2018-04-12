@@ -32,7 +32,7 @@ namespace Lmyc.Models.BookingViewModels
         public string Itinerary { get; set; }
 
         [Display(Name = "Allocated Hours")]
-        public int AllocatedHours { get; private set; }
+        public int AllocatedHours { get; set; }
 
         public string UserId { get; set; }
         public string FirstName { get; set; }
@@ -42,6 +42,12 @@ namespace Lmyc.Models.BookingViewModels
 
         public void CalculateHours()
         {
+            if (StartDateTime > EndDateTime)
+            {
+                AllocatedHours = 0;
+                return;
+            }
+
             if (StartDateTime >= DateTime.Now && StartDateTime < DateTime.Now.AddDays(1))
             {
                 AllocatedHours = 0;

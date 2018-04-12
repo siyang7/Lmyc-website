@@ -41,18 +41,24 @@ namespace Lmyc.Data
                     Skills = "none",
                     SailingQualifications = "none",
                     SailingExperience = 50,
-                    StartingCredit = 320
+                    StartingCredit = 320,
+                    CreditBalance = 320
                 };
 
 
                 var adminId = await EnsureUser(serviceProvider, admin, "P@$$w0rd");
                 await EnsureRole(serviceProvider, adminId, Role.Admin);
+                await EnsureRole(serviceProvider, adminId, Role.CruiseSkipper);
+                await EnsureRole(serviceProvider, adminId, Role.DaySkipper);
+                await EnsureRole(serviceProvider, adminId, Role.MemberGoodStanding);
 
                 var users = GetApplicationUsers();
                 foreach (var user in users)
                 {
                     var userId = await EnsureUser(serviceProvider, user, "P@$$w0rd");
                     await EnsureRole(serviceProvider, userId, Role.MemberGoodStanding);
+                    await EnsureRole(serviceProvider, userId, Role.CruiseSkipper);
+                    await EnsureRole(serviceProvider, userId, Role.DaySkipper);
                 }
 
                 // Look for any boats in the database
@@ -95,6 +101,7 @@ namespace Lmyc.Data
                     Skills = newUser.Skills,
                     SailingQualifications = newUser.SailingQualifications,
                     StartingCredit = newUser.StartingCredit,
+                    CreditBalance = newUser.CreditBalance,
                     EmergencyContactOne = newUser.EmergencyContactOne
                 };
 
@@ -146,7 +153,8 @@ namespace Lmyc.Data
                     Skills = "none",
                     SailingQualifications = "none",
                     SailingExperience = 2,
-                    StartingCredit = 320
+                    StartingCredit = 320,
+                    CreditBalance = 320
                 },
                 new ApplicationUser
                 {
@@ -164,7 +172,8 @@ namespace Lmyc.Data
                     Skills = "none",
                     SailingQualifications = "none",
                     SailingExperience = 1,
-                    StartingCredit = 320
+                    StartingCredit = 320,
+                    CreditBalance = 320
                 },
                 new ApplicationUser
                 {
@@ -182,7 +191,8 @@ namespace Lmyc.Data
                     Skills = "none",
                     SailingQualifications = "none",
                     SailingExperience = 5,
-                    StartingCredit = 320
+                    StartingCredit = 320,
+                    CreditBalance = 320
                 },
                 new ApplicationUser
                 {
@@ -200,7 +210,8 @@ namespace Lmyc.Data
                     Skills = "none",
                     SailingQualifications = "none",
                     SailingExperience = 3,
-                    StartingCredit = 320
+                    StartingCredit = 320,
+                    CreditBalance = 320
                 }
             };
 
