@@ -50,7 +50,7 @@ namespace Lmyc.Models.BookingViewModels
 
             if (StartDateTime >= DateTime.Now && StartDateTime < DateTime.Now.AddDays(1))
             {
-                AllocatedHours = 0;
+                this.AllocatedHours = 0;
                 return;
             }
 
@@ -75,7 +75,8 @@ namespace Lmyc.Models.BookingViewModels
                     totalCredit += (hourDiff >= max || hourDiff == 0) ? max : hourDiff;
                 }
             }
-            AllocatedHours = totalCredit;
+
+            this.AllocatedHours = totalCredit;
         }
     }
 }

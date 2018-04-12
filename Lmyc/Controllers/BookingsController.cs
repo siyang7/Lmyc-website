@@ -62,7 +62,7 @@ namespace Lmyc.Controllers
                 {
                     FisrtName = b.User.FirstName,
                     LastName = b.User.LastName,
-                    RoleName = string.Join(", ", _userManager.GetRolesAsync(b.User).Result)
+                    RoleName = string.Join(",", _userManager.GetRolesAsync(b.User).Result)
                 };
 
                 userRoles.Add(userRole);
@@ -79,8 +79,6 @@ namespace Lmyc.Controllers
                 Itinerary = booking.Itinerary,
                 AllocatedHours = booking.AllocatedHours,
                 UserId = booking.UserId,
-                FirstName = booking.User.FirstName,
-                LastName = booking.User.LastName,
                 MemberCrews = userRoles
             };
 
