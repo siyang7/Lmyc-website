@@ -79,14 +79,16 @@ namespace Lmyc.Data
                     return; // DB have been seeded
                 }
 
-                var bookings = GetBookings(context);
-
-                foreach (Booking b in bookings)
-                {
-                    context.Bookings.Add(b);
-                }
-
                 context.SaveChanges();
+
+                //var bookings = GetBookings(context);
+
+                //foreach (Booking b in bookings)
+                //{
+                //    context.Bookings.Add(b);
+                //}
+
+                //context.SaveChanges();
             }
                 
         }
@@ -336,32 +338,34 @@ namespace Lmyc.Data
             return boats;
         }
 
-        private static List<Booking> GetBookings(ApplicationDbContext context)
-        {
-            List<Booking> bookings = new List<Booking>();
-            var booking1 = new Booking
-            {
-                StartDateTime = DateTime.Now.AddDays(7),
-                EndDateTime = DateTime.Now.AddDays(9),
-                NonMemberCrews = "Medhat",
-                Itinerary = "Find titanic",
-                User = context.Users.FirstOrDefault(u => u.UserName == "castiel"),
-                Boat = context.Boats.FirstOrDefault(b => b.BoatId == 1)
-            };
+        //private static List<Booking> GetBookings(ApplicationDbContext context)
+        //{
+        //    List<Booking> bookings = new List<Booking>();
+        //    var booking1 = new Booking
+        //    {
+        //        StartDateTime = DateTime.Now.AddDays(7),
+        //        EndDateTime = DateTime.Now.AddDays(9),
+        //        NonMemberCrews = "Medhat",
+        //        Itinerary = "Find titanic",
+        //        UserId = context.Users.FirstOrDefault(u => u.UserName == "castiel").Id,
+        //        BoatId = context.Boats.FirstOrDefault(b => b.BoatId == 1).BoatId
+        //    };
 
-            booking1.AllocatedHours = AllocatedHoursCalculator.CalculateAllocatedHours(booking1.StartDateTime, booking1.EndDateTime);
-            var userBookings = new List<UserBooking>
-            {
-                new UserBooking
-                {
-                    User = context.Users.FirstOrDefault(u => u.UserName == "jason"),
-                    Booking = context.Bookings.FirstOrDefault(b => b.BookingId == 1)
-                }
-            };
+        //    booking1.AllocatedHours = AllocatedHoursCalculator.CalculateAllocatedHours(booking1.StartDateTime, booking1.EndDateTime);
+        //    var userBookings = new List<UserBooking>
+        //    {
+        //        new UserBooking
+        //        {
+        //            UserId = context.Users.FirstOrDefault(u => u.UserName == "jason").Id,
+        //            BookingId = context.Bookings.FirstOrDefault(b => b.BookingId == 1).BookingId
+        //        }
+        //    };
 
-            booking1.UserBookings = userBookings;
+        //    booking1.UserBookings = userBookings;
 
-            return bookings;
-        }
+        //    bookings.Add(booking1);
+
+        //    return bookings;
+        //}
     }
 }

@@ -38,6 +38,9 @@ namespace Lmyc.Controllers.API
                     UserId = u.Id,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
+                    Email = u.Email,
+                    HomePhone = u.HomePhone,
+                    MobilePhone = u.MobilePhone,
                     Role = string.Join(",", _userManager.GetRolesAsync(u).Result)
                 };
 
