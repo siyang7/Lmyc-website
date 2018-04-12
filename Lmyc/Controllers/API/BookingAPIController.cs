@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNet.Security.OAuth.Validation;
 using Lmyc.Data;
 using Lmyc.Helper;
 using Lmyc.Models;
 using Lmyc.Models.BookingViewModels;
 using Lmyc.Models.UserViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +42,7 @@ namespace Lmyc.Controllers.API
 
         // GET: api/bookingApi
         [HttpGet]
+        //[Authorize(Policy = "RequireLogin", AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         public IEnumerable<BookingViewModel> GetBooking()
         {
             var bookings = _context.Bookings
@@ -89,6 +92,7 @@ namespace Lmyc.Controllers.API
 
         // POST: api/bookingsapi
         [HttpPost]
+        //[Authorize(Policy = "RequireLogin", AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         public async Task<IActionResult> PostBooking([FromBody] BookingViewModel bookingModel)
         {
             if (!ModelState.IsValid)
@@ -146,6 +150,7 @@ namespace Lmyc.Controllers.API
 
         // DELETE: api/bookingsapi/{id}
         [HttpDelete("{id}")]
+        //[Authorize(Policy = "RequireLogin", AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteBooking([FromRoute] int id)
         {
             if (!ModelState.IsValid)
