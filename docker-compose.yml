@@ -1,8 +1,28 @@
 version: '3'
 
+volumes:
+  datafiles:
+
 services:
-  lmyc:
+  db:
+    image: mysql:8.0.0
+    volumes:
+      - datafiles:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_TCP_PORT: 3306
+  LMYC:
     image: lmyc
     build:
       context: .
       dockerfile: Lmyc/Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "8888:80"
+    environment:
+      - DBHOST=db
+      - DBPORT=3306
+      - DBPASSWORD=secret
+      - ASPNETCORE_ENVIRONMENT=Development

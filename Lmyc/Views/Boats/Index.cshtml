@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Lmyc.Models.Boat>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BoatName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BoatStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BoatPicture)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BoatDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BoatLength)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BoatMake)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BoatYear)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreditsPerHourOfUsage)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoatName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoatStatus)
+            </td>
+            <td>
+                <img src="data:image;base64,@System.Convert.ToBase64String(item.BoatPicture)" width="200" height="200" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoatDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoatLength)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoatMake)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoatYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreditsPerHourOfUsage)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BoatId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BoatId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BoatId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

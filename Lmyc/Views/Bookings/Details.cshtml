@@ -1,0 +1,73 @@
+﻿@model Lmyc.Models.BookingViewModels.BookingViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BoatName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BoatName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartDateTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndDateTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NonMemberCrews)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NonMemberCrews)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Itinerary)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Itinerary)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AllocatedHours)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AllocatedHours)
+        </dd>
+        <dt>
+            Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            Member Crews:
+        </dt>
+        @foreach (var u in Model.MemberCrews)
+    {
+        <dd>
+            Name: @u.FisrtName @u.LastName
+        </dd>
+        <dd>
+            Role: @u.RoleName
+        </dd>
+        <hr />
+}
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BookingId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

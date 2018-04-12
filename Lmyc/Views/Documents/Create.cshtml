@@ -1,0 +1,24 @@
+﻿@model Lmyc.Models.Document
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Document</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Documents" asp-action="Create" method="post" enctype="multipart/form-data">
+            <input type="hidden" value="@ViewBag.UserId" asp-for="UserId"/>
+            <input type="file" name="file" accept=".txt,.pdf,.csv"/>
+            <button type="submit">Upload File</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

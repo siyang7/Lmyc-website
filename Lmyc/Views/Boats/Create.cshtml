@@ -1,0 +1,68 @@
+﻿@model Lmyc.Models.Boat
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Boat</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BoatName" class="control-label"></label>
+                <input asp-for="BoatName" class="form-control" />
+                <span asp-validation-for="BoatName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BoatStatus" class="control-label"></label>
+                <select asp-for="BoatStatus" asp-items="Html.GetEnumSelectList<BoatStatus>()" class="form-control"></select>
+                <span asp-validation-for="BoatStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BoatPicture" class="control-label"></label>
+                <input asp-for="BoatPicture" type="file" name="Image" id="Imageinput" accept="image/*">
+                <span asp-validation-for="BoatPicture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BoatDescription" class="control-label"></label>
+                <input asp-for="BoatDescription" class="form-control" />
+                <span asp-validation-for="BoatDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BoatLength" class="control-label"></label>
+                <input asp-for="BoatLength" class="form-control" />
+                <span asp-validation-for="BoatLength" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BoatMake" class="control-label"></label>
+                <input asp-for="BoatMake" class="form-control" />
+                <span asp-validation-for="BoatMake" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BoatYear" class="control-label"></label>
+                <input asp-for="BoatYear" class="form-control" />
+                <span asp-validation-for="BoatYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreditsPerHourOfUsage" class="control-label"></label>
+                <input asp-for="CreditsPerHourOfUsage" class="form-control" />
+                <span asp-validation-for="CreditsPerHourOfUsage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
