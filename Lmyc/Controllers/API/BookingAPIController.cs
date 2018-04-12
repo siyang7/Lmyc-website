@@ -48,9 +48,9 @@ namespace Lmyc.Controllers.API
                 .Include(b => b.UserBookings)
                     .ThenInclude(b => b.User)
                 .OrderBy(b => b.StartDateTime);
-            
+
             var bookingModels = new List<BookingViewModel>();
-            
+
             foreach (var b in bookings)
             {
                 var userRoles = new List<UserRoleData>();
@@ -115,7 +115,7 @@ namespace Lmyc.Controllers.API
                 AllocatedHours = allocatedHours,
                 UserId = bookingModel.UserId
             };
-            
+
             booking.UserBookings = new List<UserBooking>();
 
             foreach (var member in bookingModel.MemberCrews)
@@ -144,7 +144,7 @@ namespace Lmyc.Controllers.API
             return Ok(bookingModel);
         }
 
-        // DELETE: api/bookingsapi
+        // DELETE: api/bookingsapi/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBooking([FromRoute] int id)
         {
@@ -184,7 +184,7 @@ namespace Lmyc.Controllers.API
             int totalCredit = 0;
 
             var bookings = _context.Bookings.Where(b => b.BoatId == bookingModel.BoatId);
-            
+
             foreach (var b in bookings)
             {
                 if (bookingModel.StartDateTime < b.EndDateTime && b.StartDateTime < bookingModel.EndDateTime)
@@ -241,7 +241,7 @@ namespace Lmyc.Controllers.API
 
             var days = bookingModel.EndDateTime.Subtract(bookingModel.StartDateTime).Duration().TotalDays;
 
-            if ( days >= 1 && !cruiseSkipper)
+            if (days >= 1 && !cruiseSkipper)
             {
                 return "Requires Cruise Skipper";
             }
@@ -252,7 +252,7 @@ namespace Lmyc.Controllers.API
                     return "Requires Day Skippers";
                 }
             }
-            
+
             var boat = await _context.Boats.SingleOrDefaultAsync(b => b.BoatId == bookingModel.BoatId);
 
             if (boat == null)
@@ -270,5 +270,4 @@ namespace Lmyc.Controllers.API
             return string.Empty;
         }
     }
-
 }
