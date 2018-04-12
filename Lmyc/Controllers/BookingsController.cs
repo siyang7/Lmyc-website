@@ -60,7 +60,8 @@ namespace Lmyc.Controllers
             {
                 var userRole = new UserRoleData
                 {
-                    Name = b.User.FirstName + " " + b.User.LastName,
+                    FisrtName = b.User.FirstName,
+                    LastName = b.User.LastName,
                     RoleName = string.Join(", ", _userManager.GetRolesAsync(b.User).Result)
                 };
 
@@ -237,7 +238,8 @@ namespace Lmyc.Controllers
                 {
                     UserId = user.Id,
                     Role = string.Join(", ", _userManager.GetRolesAsync(user).Result),
-                    Name = user.FirstName + " " + user.LastName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     Assigned = userBookings.Contains(user.Id)
                 });
             }
