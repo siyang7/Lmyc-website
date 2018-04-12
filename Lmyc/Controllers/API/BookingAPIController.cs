@@ -102,7 +102,9 @@ namespace Lmyc.Controllers.API
             {
                 return BadRequest(errors);
             }
-            
+
+            var allocatedHours = AllocatedHoursCalculator.CalculateAllocatedHours(bookingModel.StartDateTime, bookingModel.EndDateTime);
+
             var booking = new Booking
             {
                 BoatId = bookingModel.BoatId,
@@ -110,7 +112,7 @@ namespace Lmyc.Controllers.API
                 EndDateTime = bookingModel.EndDateTime,
                 NonMemberCrews = bookingModel.NonMemberCrews,
                 Itinerary = bookingModel.NonMemberCrews,
-                AllocatedHours = bookingModel.AllocatedHours,
+                AllocatedHours = allocatedHours,
                 UserId = bookingModel.UserId
             };
             
@@ -218,9 +220,7 @@ namespace Lmyc.Controllers.API
                     return "Requires Day Skippers";
                 }
             }
-
             
-
             var boat = await _context.Boats.SingleOrDefaultAsync(b => b.BoatId == bookingModel.BoatId);
 
             if (boat == null)

@@ -11,7 +11,7 @@ namespace Lmyc.Helper
         {
             if (startDateTime > endDateTime)
             {
-                return 0;
+                return -1;
             }
 
             if (startDateTime >= DateTime.Now && startDateTime < DateTime.Now.AddDays(1))
