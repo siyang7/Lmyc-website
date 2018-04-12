@@ -187,6 +187,24 @@ namespace Lmyc.Data.Migrations
                     b.ToTable("Bookings");
                 });
 
+            modelBuilder.Entity("Lmyc.Models.Document", b =>
+                {
+                    b.Property<int>("DocumentId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DocumentName");
+
+                    b.Property<string>("Path");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("DocumentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Document");
+                });
+
             modelBuilder.Entity("Lmyc.Models.UserBooking", b =>
                 {
                     b.Property<string>("UserId");
@@ -210,7 +228,8 @@ namespace Lmyc.Data.Migrations
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("Description")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(2048);
 
                     b.Property<int>("Duration");
 
@@ -474,6 +493,13 @@ namespace Lmyc.Data.Migrations
                         .HasForeignKey("BoatId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("Lmyc.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Lmyc.Models.Document", b =>
+                {
                     b.HasOne("Lmyc.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");

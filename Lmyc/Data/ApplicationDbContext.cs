@@ -30,5 +30,6 @@ namespace Lmyc.Data
         public DbSet<Boat> Boats { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Volunteer> Volunteers { get; set; }
+        public DbSet<Document> Document { get; set; }
     }
 }
