@@ -60,7 +60,7 @@ namespace Lmyc.Controllers.API
                     {
                         FisrtName = br.User.FirstName,
                         LastName = br.User.LastName,
-                        RoleName = string.Join(", ", _userManager.GetRolesAsync(b.User).Result)
+                        RoleName = string.Join(",", _userManager.GetRolesAsync(b.User).Result)
                     };
 
                     userRoles.Add(userRole);

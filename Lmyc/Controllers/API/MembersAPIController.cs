@@ -38,7 +38,7 @@ namespace Lmyc.Controllers.API
                     UserId = u.Id,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
-                    Role = string.Join(", ", _userManager.GetRolesAsync(u).Result)
+                    Role = string.Join(",", _userManager.GetRolesAsync(u).Result)
                 };
 
                 models.Add(model);
