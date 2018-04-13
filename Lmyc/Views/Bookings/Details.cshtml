@@ -46,26 +46,46 @@
         <dd>
             @Html.DisplayFor(model => model.AllocatedHours)
         </dd>
-        <dt>
-            Name
-        </dt>
         <dd>
             @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
         </dd>
-        <dt>
-            Member Crews:
-        </dt>
-        @foreach (var u in Model.MemberCrews)
-    {
-        <dd>
-            Name: @u.FisrtName @u.LastName
-        </dd>
-        <dd>
-            Role: @u.RoleName
-        </dd>
-        <hr />
-}
     </dl>
+    <div>
+        <h3>
+            Member Crews:
+        </h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Name
+                    </th>
+                    <th class="text-center">
+                        Role
+                    </th>
+                    <th class="text-center">
+                        Used Credit
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in Model.MemberCrews)
+                {
+                    <tr>
+                        <td>
+                            @u.FisrtName @u.LastName
+                        </td>
+                        <td>
+                            @u.RoleName
+                        </td>
+                        <td>
+                            @u.UsedCredit
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.BookingId">Edit</a> |
