@@ -62,6 +62,7 @@ namespace Lmyc.Controllers
                 {
                     FisrtName = b.User.FirstName,
                     LastName = b.User.LastName,
+                    UsedCredit = b.UsedCredit,
                     RoleName = string.Join(",", _userManager.GetRolesAsync(b.User).Result)
                 };
 
@@ -108,7 +109,7 @@ namespace Lmyc.Controllers
             {
                 booking.UserBookings = new List<UserBooking>();
             }
-            
+
             foreach (var user in memberCrews)
             {
                 var BookingToAdd = new UserBooking
@@ -199,13 +200,46 @@ namespace Lmyc.Controllers
             var booking = await _context.Bookings
                 .Include(b => b.Boat)
                 .Include(b => b.User)
+                .Include(b => b.UserBookings)
+                    .ThenInclude(b => b.User)
+                .OrderBy(b => b.StartDateTime)
                 .SingleOrDefaultAsync(m => m.BookingId == id);
+
             if (booking == null)
             {
                 return NotFound();
             }
 
-            return View(booking);
+            var userRoles = new List<UserRoleData>();
+
+            foreach (var b in booking.UserBookings)
+            {
+                var userRole = new UserRoleData
+                {
+                    FisrtName = b.User.FirstName,
+                    LastName = b.User.LastName,
+                    UsedCredit = b.UsedCredit,
+                    RoleName = string.Join(",", _userManager.GetRolesAsync(b.User).Result)
+                };
+
+                userRoles.Add(userRole);
+            }
+
+            var model = new BookingViewModel
+            {
+                BookingId = booking.BookingId,
+                BoatId = booking.BoatId,
+                BoatName = booking.Boat.BoatName,
+                StartDateTime = booking.StartDateTime,
+                EndDateTime = booking.EndDateTime,
+                NonMemberCrews = booking.NonMemberCrews,
+                Itinerary = booking.Itinerary,
+                AllocatedHours = booking.AllocatedHours,
+                UserId = booking.UserId,
+                MemberCrews = userRoles
+            };
+
+            return View(model);
         }
 
         // POST: Bookings/Delete/5
@@ -213,9 +247,25 @@ namespace Lmyc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var booking = await _context.Bookings.SingleOrDefaultAsync(m => m.BookingId == id);
+            var booking = await _context.Bookings
+                .Include(b => b.UserBookings)
+                    .ThenInclude(b => b.User)
+                .SingleOrDefaultAsync(b => b.BookingId == id);
+            //var booking = await _context.Bookings.SingleOrDefaultAsync(m => m.BookingId == id);
+            if (booking == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var b in booking.UserBookings)
+            {
+                // return the credit
+                b.User.CreditBalance += b.UsedCredit;
+            }
+
             _context.Bookings.Remove(booking);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -242,7 +292,7 @@ namespace Lmyc.Controllers
                 });
             }
 
-            ViewData["Users"] = model;
+            ViewData["Members"] = model;
         }
     }
 }
